@@ -1,0 +1,305 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/CBDS_black_logo.jpg'; // Adjust path to your logo
+
+interface Props {
+  transparent?: boolean;
+}
+
+const { transparent = false } = Astro.props;
+
+interface NavLink {
+  label: string;
+  href: string;
+}
+
+const navLinks: NavLink[] = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Staff', href: '/staff' },
+  { label: 'Calendar', href: '/calendar' },
+  { label: 'Photos', href: '/photos' },
+];
+---
+
+<header class:list={['header', { transparent }]}>
+  <div class="container">
+    <a href="/" class="logo-link">
+      <Image src={logo} alt="Classic Ballroom Dance Studio" class="logo" />
+    </a>
+    
+    <nav class="nav" id="nav-menu">
+      {navLinks.map(link => (
+        <a href={link.href} class="nav-link">
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <a href="/contact" class="contact-button">
+      Contact Us
+    </a>
+
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+      <span class="hamburger"></span>
+    </button>
+  </div>
+</header>
+
+{!transparent && <div class="header-spacer"></div>}
+
+<style>
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.header.transparent {
+  background: transparent;
+  box-shadow: none;
+}
+
+.header-spacer {
+  height: 76px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 8px 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.logo-link {
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex: 1;
+  justify-content: end;
+}
+
+.nav-link {
+  color: #2c2c2c;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.header.transparent .nav-link {
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link:hover {
+  color: #8b5a3c;
+}
+
+.header.transparent .nav-link:hover {
+  color: #f5d4b8;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #8b5a3c;
+  transition: width 0.3s ease;
+}
+
+.header.transparent .nav-link::after {
+  background: #f5d4b8;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.contact-button {
+  background: #2c2c2c;
+  color: white;
+  padding: 0.65rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.header.transparent .contact-button {
+  background: rgba(255, 255, 255, 0.9);
+  color: #2c2c2c;
+}
+
+.contact-button:hover {
+  background: #1a1a1a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header.transparent .contact-button:hover {
+  background: white;
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+.hamburger {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #2c2c2c;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.header.transparent .hamburger {
+  background: white;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  left: 0px;
+  background: #2c2c2c;
+  transition: all 0.3s ease;
+}
+
+.header.transparent .hamburger::before,
+.header.transparent .hamburger::after {
+  background: white;
+}
+
+.hamburger::before {
+  top: -7px;
+}
+
+.hamburger::after {
+  top: 7px;
+}
+
+.mobile-toggle.open .hamburger {
+  background: transparent;
+}
+
+.mobile-toggle.open .hamburger::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.mobile-toggle.open .hamburger::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0.75rem 1rem;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 1rem 2rem;
+    width: 100%;
+    color: #2c2c2c !important;
+    text-shadow: none !important;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  .contact-button {
+    display: none;
+  }
+
+  .logo {
+    height: 50px;
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const nav = document.getElementById('nav-menu');
+
+    if (mobileToggle && nav) {
+      mobileToggle.addEventListener('click', () => {
+        nav.classList.toggle('open');
+        mobileToggle.classList.toggle('open');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (!mobileToggle.contains(target) && !nav.contains(target)) {
+          nav.classList.remove('open');
+          mobileToggle.classList.remove('open');
+        }
+      });
+
+      // Close menu when clicking a link
+      nav.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('open');
+          mobileToggle.classList.remove('open');
+        });
+      });
+    }
+  });
+</script>

@@ -1,0 +1,30 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import image1 from '../assets/images/dance_gc.png';
+
+// Configure number of columns here
+const columnsPerRow = 2;
+---
+
+<div class="card-row" style={`--columns: ${columnsPerRow};`}>
+	<ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
+	<ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
+	<ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
+	<ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
+    <ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
+	<ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
+</div>
+
+<style>
+.card-row {
+	display: grid;
+	grid-template-columns: repeat(var(--columns, 2), 1fr);
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 768px) {
+	.card-row {
+		grid-template-columns: 1fr;
+	}
+}
+</style>
