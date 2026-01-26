@@ -54,14 +54,13 @@ const navLinks: NavLink[] = [
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
 .header.transparent {
-  background: transparent;
   box-shadow: none;
 }
 
@@ -98,7 +97,7 @@ const navLinks: NavLink[] = [
 }
 
 .nav-link {
-  color: #2c2c2c;
+  color: black;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
@@ -107,7 +106,6 @@ const navLinks: NavLink[] = [
 }
 
 .header.transparent .nav-link {
-  color: white;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -150,19 +148,10 @@ const navLinks: NavLink[] = [
   flex-shrink: 0;
 }
 
-.header.transparent .contact-button {
-  background: rgba(255, 255, 255, 0.9);
-  color: #2c2c2c;
-}
-
 .contact-button:hover {
   background: #1a1a1a;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.header.transparent .contact-button:hover {
-  background: white;
 }
 
 .mobile-toggle {
@@ -183,10 +172,6 @@ const navLinks: NavLink[] = [
   transition: background 0.3s ease;
 }
 
-.header.transparent .hamburger {
-  background: white;
-}
-
 .hamburger::before,
 .hamburger::after {
   content: '';
@@ -196,11 +181,6 @@ const navLinks: NavLink[] = [
   left: 0px;
   background: #2c2c2c;
   transition: all 0.3s ease;
-}
-
-.header.transparent .hamburger::before,
-.header.transparent .hamburger::after {
-  background: white;
 }
 
 .hamburger::before {

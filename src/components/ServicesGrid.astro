@@ -1,18 +1,35 @@
 ---
-import ServiceCard from './ServiceCard.astro';
-import image1 from '../assets/images/dance_gc.png';
+import ImageCard from './ImageCard.astro';
 
 // Configure number of columns here
 const columnsPerRow = 2;
+import lessonsImage from '../assets/images/dance_lesson_wide.png';
+import weddingsImage from '../assets/images/dance_wedding_wide.png';
+import tapImage from '../assets/images/tap.png';
+import competitionImage from '../assets/images/dance_comp.png';
+import countryImage from '../assets/images/country_line_dance.png';
+import partyImage from '../assets/images/themed_party.png';
+import kidsImage from '../assets/images/kids_dance.png';
+import socialImage from '../assets/images/dance_social.png'
+import performanceImage from '../assets/images/dance_performance.png'
+import groupImage from '../assets/images/dance_gc.png'
 ---
 
 <div class="card-row" style={`--columns: ${columnsPerRow};`}>
-	<ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
-	<ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
-	<ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
-	<ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
-    <ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
-	<ServiceCard image={image1} title="Dance Lessons" hoverText="Discover More"/>
+	<ImageCard 
+		image={lessonsImage} 
+		title="Dance Lessons" 
+		hoverText="Learn to dance by yourself or with a partner with any of our experienced instructors.<br><br>Progress through our syllabus, learning steps from social foundation up to gold and open level.<br><br>Learn the Waltz, Cha Cha, Hustle, and many, many more!"
+		/>
+	<ImageCard image={weddingsImage} title="Wedding Dances" hoverText="Discover More"/>
+	<ImageCard image={tapImage} title="Tap Dance" hoverText="Discover More"/>
+	<ImageCard image={competitionImage} title="Compeitions" hoverText="Discover More"/>
+    <ImageCard image={countryImage} title="Country Line Dance" hoverText="Discover More"/>
+	<ImageCard image={partyImage} title="Themed Parties" hoverText="Discover More"/>
+	<ImageCard image={kidsImage} title="Classic Kids" hoverText="Discover More"/>
+	<ImageCard image={socialImage} title="Themed Parties" hoverText="Discover More"/>
+	<ImageCard image={performanceImage} title="Showcases" hoverText="Discover More"/>
+	<ImageCard image={groupImage} title="Group Classes" hoverText="Discover More"/>
 </div>
 
 <style>

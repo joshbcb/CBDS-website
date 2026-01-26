@@ -1,0 +1,417 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+import { events } from "../data/Events.ts";
+
+export interface Event {
+  title: string;
+  date: string;
+  time: string;
+  description: string;
+  image: ImageMetadata;
+}
+
+interface Props {
+  buttonText?: string;
+  buttonLink?: string;
+}
+
+const { 
+  buttonText = "All Calendars",
+  buttonLink = "/calendar"
+} = Astro.props;
+---
+
+<section class="event-carousel">
+  <div class="carousel-container">
+    <div class="content-side">
+      <div class="event-info" id="event-info">
+        {events.map((event, index) => (
+          <div class="event-slide" data-index={index} class:list={[{ active: index === 0 }]}>
+            <h2 class="event-title">{event.title}</h2>
+            <div class="title-underline"></div>
+            <p class="event-date">{event.date}</p>
+            <p class="event-time">{event.time}</p>
+            <p class="event-description">{event.description}</p>
+          </div>
+        ))}
+      </div>
+      <a href={buttonLink} class="calendar-button">{buttonText}</a>
+    </div>
+
+    <div class="images-side">
+      <button class="nav-arrow prev" id="prev-btn" aria-label="Previous event">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="image-stack" id="image-stack">
+        {events.map((event, index) => (
+          <div class="image-wrapper" data-index={index} class:list={[{ active: index === 0 }]}>
+            <Image src={event.image} alt={event.title} class="event-image" />
+          </div>
+        ))}
+      </div>
+
+      <button class="nav-arrow next" id="next-btn" aria-label="Next event">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="dots-container">
+        {events.map((_, index) => (
+          <button 
+            class="dot" 
+            data-index={index}
+            class:list={[{ active: index === 0 }]}
+            aria-label={`Go to event ${index + 1}`}
+          ></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .event-carousel {
+    width: 100%;
+    background: #701717;
+    min-height: 600px;
+    align-content: center;
+    padding: 3rem 0 4rem;
+  }
+
+  .carousel-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    padding: 0 4rem;
+    align-items: center;
+  }
+
+  .content-side {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-right: 25px;
+    gap: 2rem;
+  }
+
+  .event-info {
+    position: relative;
+    min-height: 320px;
+  }
+
+  .event-slide {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .event-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .event-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+  }
+
+  .title-underline {
+    width: 100%;
+    height: 3px;
+    background: white;
+    margin-bottom: 1.5rem;
+  }
+
+  .event-date {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .event-time {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .event-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    padding: 30px 0;
+    margin: 0;
+    max-width: 500px;
+  }
+
+  .calendar-button {
+    display: inline-block;
+    background: white;
+    color: #701717;
+    width: 80%;
+    padding: 1rem 3rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+    align-self: flex-start;
+  }
+
+  .calendar-button:hover {
+    background: #f5f5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .images-side {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-stack {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    aspect-ratio: 4/3;
+  }
+
+  .image-wrapper {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.5s ease;
+    pointer-events: none;
+  }
+
+  .image-wrapper.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 3;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8b4444;
+  }
+
+  .nav-arrow:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .nav-arrow svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-arrow.prev {
+    left: -25px;
+  }
+
+  .nav-arrow.next {
+    right: -25px;
+  }
+
+  .dots-container {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 3;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .dot.active {
+    background: white;
+    transform: scale(1.2);
+  }
+
+  .dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 968px) {
+    .carousel-container {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding: 0 2rem;
+    }
+
+    .event-title {
+      font-size: 2.5rem;
+    }
+
+    .content-side {
+      text-align: center;
+      align-items: normal;
+      padding: 0 15%;
+    }
+
+    .event-info {
+      min-height: 250px;
+    }
+
+    .title-underline {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .event-description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .calendar-button {
+      align-self: center;
+    }
+
+    .nav-arrow.prev {
+      left: 10px;
+    }
+
+    .nav-arrow.next {
+      right: 10px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .event-carousel {
+      padding: 3rem 0 4.5rem;
+    }
+
+    .carousel-container {
+      padding: 0 1.5rem;
+    }
+
+    .event-title {
+      font-size: 2rem;
+    }
+
+    .event-date,
+    .event-time {
+      font-size: 1.1rem;
+    }
+
+    .event-description {
+      font-size: 1rem;
+    }
+
+    .nav-arrow {
+      width: 40px;
+      height: 40px;
+    }
+
+    .nav-arrow svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>
+
+<script>
+  let currentIndex = 0;
+  const eventSlides = document.querySelectorAll('.event-slide');
+  const imageWrappers = document.querySelectorAll('.image-wrapper');
+  const dots = document.querySelectorAll('.dot');
+  const totalSlides = eventSlides.length;
+
+  function showSlide(index: number) {
+    // Remove active class from all
+    eventSlides.forEach(slide => slide.classList.remove('active'));
+    imageWrappers.forEach(wrapper => wrapper.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    // Add active class to current
+    eventSlides[index].classList.add('active');
+    imageWrappers[index].classList.add('active');
+    dots[index].classList.add('active');
+
+    currentIndex = index;
+  }
+
+  function nextSlide() {
+    const next = (currentIndex + 1) % totalSlides;
+    showSlide(next);
+  }
+
+  function prevSlide() {
+    const prev = (currentIndex - 1 + totalSlides) % totalSlides;
+    showSlide(prev);
+  }
+
+  // Event listeners
+  document.getElementById('next-btn')?.addEventListener('click', nextSlide);
+  document.getElementById('prev-btn')?.addEventListener('click', prevSlide);
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => showSlide(index));
+  });
+
+  // Auto-play (optional - remove if not wanted)
+  let autoplayInterval = setInterval(nextSlide, 5000);
+
+  // Pause autoplay on hover
+  const carousel = document.querySelector('.event-carousel');
+  carousel?.addEventListener('mouseenter', () => {
+    clearInterval(autoplayInterval);
+  });
+
+  carousel?.addEventListener('mouseleave', () => {
+    autoplayInterval = setInterval(nextSlide, 5000);
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') prevSlide();
+    if (e.key === 'ArrowRight') nextSlide();
+  });
+</script>

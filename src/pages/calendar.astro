@@ -1,9 +1,32 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import Header from "../components/Header.astro"
+import Footer from "../components/Footer.astro"
+
+import ClassList from "../components/ClassList.astro";
+import MonthlyCalendars from "../components/MonthlyCalendars.astro";
+import EventCarousel from "../components/EventCarousel.astro";
+
+import { classes } from "../data/Classes.ts";
+import { currentMonth, nextMonth } from "../data/Calendars.ts";
 ---
 
 <Layout>
     <Header />
-    <div>Calendar Page</div>
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 40%">
+            <ClassList 
+                classes={classes}
+                sectionTitle="Regular Classes"
+            />
+        </div>
+        <div style="width: 60%;">
+            <MonthlyCalendars 
+                currentMonth={currentMonth}
+                nextMonth={nextMonth}
+            />
+        </div>
+    </div>
+    <EventCarousel />
+    <Footer />
 </Layout>

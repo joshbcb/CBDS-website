@@ -1,0 +1,188 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export interface CalendarMonth {
+  name: string;
+  image: ImageMetadata;
+}
+
+interface Props {
+  currentMonth: CalendarMonth;
+  nextMonth: CalendarMonth;
+}
+
+const { currentMonth, nextMonth } = Astro.props;
+---
+
+<section class="monthly-calendars">
+  <div class="calendar-header">
+    <button class="month-button active" data-month="current" id="current-btn">
+      {currentMonth.name}
+    </button>
+    <button class="month-button" data-month="next" id="next-btn">
+      {nextMonth.name}
+    </button>
+  </div>
+
+  <div class="calendar-display">
+    <div class="calendar-wrapper active" data-month="current">
+      <Image 
+        src={currentMonth.image} 
+        alt={`${currentMonth.name} Calendar`}
+        class="calendar-image"
+      />
+    </div>
+    <div class="calendar-wrapper" data-month="next">
+      <Image 
+        src={nextMonth.image} 
+        alt={`${nextMonth.name} Calendar`}
+        class="calendar-image"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .monthly-calendars {
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+  }
+
+  .calendar-header {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem 1.5rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .month-button {
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 1.25rem 3rem;
+    border: 3px solid #2c2c2c;
+    background: white;
+    color: #2c2c2c;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .month-button:hover {
+    background: #f5f5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .month-button.active {
+    background: #2c2c2c;
+    color: white;
+    border-color: #2c2c2c;
+  }
+
+  .calendar-display {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .calendar-wrapper {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    right: 2rem;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .calendar-wrapper.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    left: 0;
+    right: 0;
+  }
+
+  .calendar-image {
+    width: 100%;
+    height: auto;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    display: block;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .monthly-calendars {
+      padding: 2rem 0;
+    }
+
+    .calendar-header {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .month-button {
+      font-size: 1.25rem;
+      padding: 1rem 2rem;
+      width: 100%;
+    }
+
+    .calendar-display {
+      padding: 0 1rem;
+    }
+
+    .calendar-wrapper {
+      left: 1rem;
+      right: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .month-button {
+      font-size: 1.1rem;
+      padding: 0.85rem 1.5rem;
+    }
+
+    .calendar-header {
+      padding: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll('.month-button');
+  const wrappers = document.querySelectorAll('.calendar-wrapper');
+
+  function showCalendar(month: string) {
+    // Remove active class from all buttons and wrappers
+    buttons.forEach(btn => btn.classList.remove('active'));
+    wrappers.forEach(wrapper => wrapper.classList.remove('active'));
+
+    // Add active class to selected month
+    const activeButton = document.querySelector(`[data-month="${month}"]`);
+    const activeWrapper = document.querySelector(`.calendar-wrapper[data-month="${month}"]`);
+    
+    activeButton?.classList.add('active');
+    activeWrapper?.classList.add('active');
+  }
+
+  // Add click listeners to buttons
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const month = button.getAttribute('data-month');
+      if (month) {
+        showCalendar(month);
+      }
+    });
+  });
+</script>

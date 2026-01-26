@@ -1,0 +1,160 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  image: ImageMetadata;
+  title: string;
+  hoverText: string;
+}
+
+const { image, title, hoverText } = Astro.props;
+---
+
+<div class="image-card">
+    <Image src={image} alt={title} class="bg-image" />
+    <div class="overlay">
+        <div class="content">
+            <h3 class="title">{title}</h3>
+            <div class="hover-text" set:html={hoverText}></div>
+        </div>
+    </div>
+</div>
+
+<style>
+.image-card {
+  position: relative;
+  flex: 1 1 0;
+  height: 350px;
+  overflow: hidden;
+}
+
+/* Background Image */
+.bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Gradient Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s ease;
+  z-index: 1;
+  padding: 2rem;
+}
+
+/* Content Container */
+.content {
+  width: 100%;
+  transition: all 1s ease;
+}
+
+/* Title */
+.title {
+  color: white;
+  font-size: 3rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  margin: 0;
+  transition: all 1s ease;
+  position: relative;
+  padding-bottom: 0;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: width 1s ease;
+}
+
+/* Hover Text */
+.hover-text {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  text-align: left;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-top: 0;
+  transition: all 1s ease;
+  white-space: normal;
+}
+
+/* Hover State */
+.image-card:hover .overlay {
+  background: rgba(0, 0, 0, 0.7);
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.image-card:hover .title {
+  padding-bottom: 0.5rem;
+}
+
+.image-card:hover .title::after {
+  width: 100%;
+}
+
+.image-card:hover .hover-text {
+  opacity: 1;
+  max-height: 500px;
+  margin-top: 1.5rem;
+}
+
+/* Mobile: Show hover state on tap */
+@media (hover: none) and (pointer: coarse) {
+  .image-card:active .overlay {
+    background: rgba(0, 0, 0, 0.7);
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  .image-card:active .title {
+    font-size: 2rem;
+    text-align: left;
+    padding-bottom: 0.5rem;
+  }
+  
+  .image-card:active .title::after {
+    width: 100%;
+  }
+  
+  .image-card:active .hover-text {
+    opacity: 1;
+    max-height: 500px;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Responsive font sizes */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .image-card:hover .title {
+    font-size: 1.5rem;
+  }
+  
+  .hover-text {
+    font-size: 1rem;
+  }
+}
+</style>

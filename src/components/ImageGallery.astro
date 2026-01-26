@@ -1,0 +1,502 @@
+---
+// ImageGallery.astro
+// Component for displaying image galleries with click-to-expand functionality
+
+interface Props {
+  header: string;
+  images: string[];
+}
+
+const { header, images } = Astro.props;
+const galleryId = `gallery-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="image-gallery" data-gallery-id={galleryId}>
+  <h2 class="gallery-header">{header}</h2>
+  
+  <div class="gallery-grid">
+    {images.map((imageSrc, index) => (
+      <div class="image-item" data-index={index}>
+        <img 
+          src={imageSrc} 
+          alt={`${header} - Image ${index + 1}`}
+          loading="lazy"
+        />
+        <div class="expand-hint">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <polyline points="9 21 3 21 3 15"></polyline>
+            <line x1="21" y1="3" x2="14" y2="10"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+        </div>
+      </div>
+    ))}
+  </div>
+  
+  <!-- Fullscreen overlay -->
+  <div class="fullscreen-overlay">
+    <button class="close-btn" aria-label="Close fullscreen">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    
+    <div class="fullscreen-content">
+      <img src="" alt="" />
+    </div>
+    
+    <div class="navigation-controls">
+      <button class="nav-btn prev-btn" aria-label="Previous image">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button class="nav-btn next-btn" aria-label="Next image">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="image-counter">
+      <span class="current-index">1</span> / <span class="total-images">{images.length}</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Work+Sans:wght@300;400;500&display=swap');
+  
+  .image-gallery {
+    width: 100%;
+    margin-bottom: 4rem;
+    padding: 0 2rem;
+    position: relative;
+  }
+  
+  .gallery-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .gallery-header::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b 0%, #ffd93d 100%);
+    border-radius: 2px;
+    animation: expandWidth 1s ease-out 0.3s backwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes expandWidth {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  .gallery-grid {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 1rem;
+    scroll-behavior: smooth;
+    animation: fadeIn 1s ease-out 0.4s backwards;
+    /* Custom scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #701717 rgba(0, 0, 0, 0.1);
+  }
+  
+  .gallery-grid::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .gallery-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  .gallery-grid::-webkit-scrollbar-thumb {
+    background: rgba(255, 107, 107, 0.5);
+    border-radius: 4px;
+  }
+  
+  .gallery-grid::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 107, 107, 0.7);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .image-item {
+    position: relative;
+    min-width: 350px;
+    height: 350px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  }
+  
+  .image-item:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+  }
+  
+  .image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .image-item:hover img {
+    transform: scale(1.05);
+  }
+  
+  .expand-hint {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: #1a1a1a;
+  }
+  
+  .image-item:hover .expand-hint {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .expand-hint svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Fullscreen overlay */
+  .fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.96);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  
+  .fullscreen-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10001;
+  }
+  
+  .close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg) scale(1.1);
+  }
+  
+  .fullscreen-content {
+    max-width: 95vw;
+    max-height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: zoomIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .fullscreen-content img {
+    max-width: 100%;
+    max-height: 95vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  }
+  
+  .navigation-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    pointer-events: none;
+    z-index: 10001;
+  }
+  
+  .nav-btn {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+  }
+  
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+  
+  .nav-btn:active {
+    transform: scale(0.95);
+  }
+  
+  .image-counter {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 10001;
+  }
+  
+  .current-index {
+    font-weight: 700;
+    color: #ffd93d;
+  }
+  
+  @media (max-width: 768px) {
+    .gallery-header {
+      font-size: 2rem;
+    }
+    
+    .gallery-grid {
+      gap: 1rem;
+    }
+    
+    .image-item {
+      min-width: 280px;
+      height: 280px;
+    }
+    
+    .close-btn,
+    .nav-btn {
+      width: 48px;
+      height: 48px;
+    }
+    
+    .navigation-controls {
+      padding: 0 1rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const galleries = document.querySelectorAll('.image-gallery');
+    
+    galleries.forEach(gallery => {
+      const imageItems = gallery.querySelectorAll('.image-item');
+      const overlay = gallery.querySelector('.fullscreen-overlay') as HTMLElement | null;
+      const fullscreenImg = overlay?.querySelector('.fullscreen-content img') as HTMLImageElement | null;
+      const closeBtn = overlay?.querySelector('.close-btn') as HTMLButtonElement | null;
+      const prevBtn = overlay?.querySelector('.prev-btn') as HTMLButtonElement | null;
+      const nextBtn = overlay?.querySelector('.next-btn') as HTMLButtonElement | null;
+      const currentIndexEl = overlay?.querySelector('.current-index') as HTMLElement | null;
+      
+      if (!overlay || !fullscreenImg || !closeBtn || !prevBtn || !nextBtn || !currentIndexEl) {
+        console.error('Gallery elements not found');
+        return;
+      }
+      
+      let currentIndex = 0;
+      const images = Array.from(imageItems).map(item => {
+        const img = item.querySelector('img') as HTMLImageElement | null;
+        return img ? img.src : '';
+      }).filter(src => src !== '');
+      
+      function openFullscreen(index: number) {
+        if (!fullscreenImg || !currentIndexEl || !overlay) return;
+        
+        currentIndex = index;
+        fullscreenImg.src = images[currentIndex];
+        
+        const imgElement = imageItems[currentIndex]?.querySelector('img') as HTMLImageElement | null;
+        if (imgElement) {
+          fullscreenImg.alt = imgElement.alt;
+        }
+        
+        currentIndexEl.textContent = (currentIndex + 1).toString();
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeFullscreen() {
+        if (!overlay) return;
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      function showPrevious() {
+        if (!fullscreenImg || !currentIndexEl) return;
+        
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        fullscreenImg.src = images[currentIndex];
+        
+        const imgElement = imageItems[currentIndex]?.querySelector('img') as HTMLImageElement | null;
+        if (imgElement) {
+          fullscreenImg.alt = imgElement.alt;
+        }
+        
+        currentIndexEl.textContent = (currentIndex + 1).toString();
+        
+        // Re-trigger animation
+        fullscreenImg.style.animation = 'none';
+        setTimeout(() => {
+          if (fullscreenImg) {
+            fullscreenImg.style.animation = '';
+          }
+        }, 10);
+      }
+      
+      function showNext() {
+        if (!fullscreenImg || !currentIndexEl) return;
+        
+        currentIndex = (currentIndex + 1) % images.length;
+        fullscreenImg.src = images[currentIndex];
+        
+        const imgElement = imageItems[currentIndex]?.querySelector('img') as HTMLImageElement | null;
+        if (imgElement) {
+          fullscreenImg.alt = imgElement.alt;
+        }
+        
+        currentIndexEl.textContent = (currentIndex + 1).toString();
+        
+        // Re-trigger animation
+        fullscreenImg.style.animation = 'none';
+        setTimeout(() => {
+          if (fullscreenImg) {
+            fullscreenImg.style.animation = '';
+          }
+        }, 10);
+      }
+      
+      // Click on image to open fullscreen
+      imageItems.forEach((item, index) => {
+        item.addEventListener('click', () => openFullscreen(index));
+      });
+      
+      // Close fullscreen
+      closeBtn.addEventListener('click', closeFullscreen);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          closeFullscreen();
+        }
+      });
+      
+      // Navigation
+      prevBtn.addEventListener('click', showPrevious);
+      nextBtn.addEventListener('click', showNext);
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!overlay || !overlay.classList.contains('active')) return;
+        
+        switch(e.key) {
+          case 'Escape':
+            closeFullscreen();
+            break;
+          case 'ArrowLeft':
+            showPrevious();
+            break;
+          case 'ArrowRight':
+            showNext();
+            break;
+        }
+      });
+    });
+  });
+</script>
