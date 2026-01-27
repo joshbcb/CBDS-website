@@ -47,14 +47,18 @@ const { image, title, hoverText } = Astro.props;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 1s ease;
+  transition: all 0.5s ease;
   z-index: 1;
   padding: 2rem;
 }
 
-/* Content Container */
+/* Content Container - use top/transform so position animates smoothly */
 .content {
-  width: 100%;
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
   transition: all 1s ease;
 }
 
@@ -75,11 +79,12 @@ const { image, title, hoverText } = Astro.props;
   content: '';
   position: absolute;
   bottom: -8px;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 2px;
   background-color: white;
-  transition: width 1s ease;
+  transition: width 0.5s ease;
 }
 
 /* Hover Text */
@@ -91,7 +96,7 @@ const { image, title, hoverText } = Astro.props;
   color: white;
   font-size: 1.1rem;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.4;
   margin-top: 0;
   transition: all 1s ease;
   white-space: normal;
@@ -100,8 +105,11 @@ const { image, title, hoverText } = Astro.props;
 /* Hover State */
 .image-card:hover .overlay {
   background: rgba(0, 0, 0, 0.7);
-  align-items: flex-start;
-  justify-content: flex-start;
+}
+
+.image-card:hover .content {
+  top: 2rem;
+  transform: translateY(0);
 }
 
 .image-card:hover .title {
@@ -110,6 +118,7 @@ const { image, title, hoverText } = Astro.props;
 
 .image-card:hover .title::after {
   width: 100%;
+  transform: translateX(-50%);
 }
 
 .image-card:hover .hover-text {
@@ -122,13 +131,15 @@ const { image, title, hoverText } = Astro.props;
 @media (hover: none) and (pointer: coarse) {
   .image-card:active .overlay {
     background: rgba(0, 0, 0, 0.7);
-    align-items: flex-start;
-    justify-content: flex-start;
+  }
+
+  .image-card:active .content {
+    top: 2rem;
+    transform: translateY(0);
   }
   
   .image-card:active .title {
     font-size: 2rem;
-    text-align: left;
     padding-bottom: 0.5rem;
   }
   
@@ -150,7 +161,7 @@ const { image, title, hoverText } = Astro.props;
   }
   
   .image-card:hover .title {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   
   .hover-text {

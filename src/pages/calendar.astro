@@ -13,20 +13,48 @@ import { currentMonth, nextMonth } from "../data/Calendars.ts";
 
 <Layout>
     <Header />
-    <div style="display: flex; flex-direction: row">
-        <div style="width: 40%">
-            <ClassList 
-                classes={classes}
-                sectionTitle="Regular Classes"
-            />
-        </div>
-        <div style="width: 60%;">
+    <div class="calendar-layout">
+        <div class="calendar-layout-calendars">
             <MonthlyCalendars 
                 currentMonth={currentMonth}
                 nextMonth={nextMonth}
+            />
+        </div>
+        <div class="calendar-layout-classes">
+            <ClassList 
+                classes={classes}
+                sectionTitle="Regular Classes"
             />
         </div>
     </div>
     <EventCarousel />
     <Footer />
 </Layout>
+
+<style>
+  /* Desktop: classes left (40%), calendar right (60%). DOM order is calendar then classes, so use row-reverse. */
+  .calendar-layout {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .calendar-layout-calendars {
+    width: 60%;
+  }
+
+  .calendar-layout-classes {
+    width: 40%;
+  }
+
+  /* Mobile: calendar on top, classes underneath */
+  @media (max-width: 768px) {
+    .calendar-layout {
+      flex-direction: column;
+    }
+
+    .calendar-layout-calendars,
+    .calendar-layout-classes {
+      width: 100%;
+    }
+  }
+</style>

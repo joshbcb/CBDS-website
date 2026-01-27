@@ -1,0 +1,141 @@
+---
+export type ContactIconType = 'phone' | 'email' | 'location';
+
+interface Props {
+  icon: ContactIconType;
+  mainText: string;
+  secondaryText?: string;
+  href?: string;
+  variant?: 'light' | 'dark';
+}
+
+const { icon, mainText, secondaryText, href, variant = 'light' } = Astro.props;
+
+const Wrapper = href ? 'a' : 'div';
+const wrapperProps = href ? { href } : {};
+---
+
+<Wrapper class="contact-info-card" class:list={[`variant-${variant}`]} {...wrapperProps}>
+  <div class="icon-wrap" aria-hidden="true">
+    {icon === 'phone' && (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+    )}
+    {icon === 'email' && (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+    )}
+    {icon === 'location' && (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+      </svg>
+    )}
+  </div>
+  <div class="text-wrap">
+    <span class="main-text">{mainText}</span>
+    {secondaryText && <span class="secondary-text">{secondaryText}</span>}
+  </div>
+</Wrapper>
+
+<style>
+  .contact-info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+    min-width: 0;
+  }
+
+  a.contact-info-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .icon-wrap {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-wrap svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .text-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .main-text,
+  .secondary-text {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .secondary-text {
+    font-size: 0.95rem;
+    opacity: 0.95;
+  }
+
+  /* Light variant: glassmorphism on dark hero */
+  .contact-info-card.variant-light {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: white;
+  }
+
+  .contact-info-card.variant-light .main-text,
+  .contact-info-card.variant-light .secondary-text {
+    color: white;
+  }
+
+  .contact-info-card.variant-light .icon-wrap {
+    color: white;
+  }
+
+  /* Dark variant: for footer or light backgrounds */
+  .contact-info-card.variant-dark {
+    background: transparent;
+    color: #2c2c2c;
+  }
+
+  .contact-info-card.variant-dark .main-text,
+  .contact-info-card.variant-dark .secondary-text {
+    color: #2c2c2c;
+  }
+
+  .contact-info-card.variant-dark .icon-wrap {
+    color: #2c2c2c;
+  }
+
+  @media (max-width: 768px) {
+    .contact-info-card {
+      padding: 1rem 1.25rem;
+    }
+
+    .main-text {
+      font-size: 0.95rem;
+    }
+
+    .secondary-text {
+      font-size: 0.9rem;
+    }
+  }
+</style>

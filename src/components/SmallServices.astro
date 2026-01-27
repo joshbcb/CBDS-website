@@ -1,0 +1,90 @@
+---
+import ImageCard from './ImageCard.astro';
+
+// Configure number of columns here
+const columnsPerRow = 3;
+import lessonsImage from '../assets/images/dance_lesson_wide.png';
+import weddingsImage from '../assets/images/dance_wedding_wide.png';
+import performanceImage from '../assets/images/dance_performance.png'
+---
+<section class="small-services">
+    <div class="small-services-inner">
+        <div class="text-container">
+            <h2 class="section-title">SEE YOURSELF ON THE DANCE FLOOR!</h2>
+            <p class="section-description">Explore our many programs and services to find what excites you! From group and private lessons, to showcases, competitions, and special events, you are sure to find what's right for you. 
+        </div>
+        <div class="card-row" style={`--columns: ${columnsPerRow};`}>
+            <ImageCard 
+                image={lessonsImage} 
+                title="Dance Lessons" 
+                hoverText="Learn to dance by yourself or with a partner with any of our experienced instructors.<br><br>Progress through our syllabus, learning steps from social foundation up to gold and open level.<br><br>Learn the Waltz, Cha Cha, Hustle, and many, many more!"
+            />
+            <ImageCard 
+                image={weddingsImage} 
+                title="Wedding Dances" 
+                hoverText="Learn to dance the perfect wedding dance with your partner.<br><br>We offer a variety of wedding dance packages, including private lessons, group classes, and choreography services."
+            />
+            <ImageCard 
+                image={performanceImage} 
+                title="Showcases" 
+                hoverText="Perform in our either of our spring and fall showcases.<br><br>We offer a variety of showcase packages, including private lessons, group classes, and choreography services."
+            />
+        </div>
+    </div>
+</section>
+
+<style>
+
+    .small-services {
+        width: 100%;
+        background: #f5f5f5;
+    }
+
+    .small-services-inner {
+        margin: 0 auto;
+        padding: 4rem 0;
+    }
+
+    .text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: left;
+        margin-bottom: 2rem;
+        padding: 0 2rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin: 0;
+        line-height: 1.2;
+        border-bottom: 4px solid;
+        margin-bottom: 1rem;
+    }
+
+    .section-description {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #2c2c2c;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .card-row {
+        display: grid;
+        grid-template-columns: repeat(var(--columns, 2), 1fr);
+    }
+
+    /* Responsive: stack on mobile */
+    @media (max-width: 768px) {
+        .card-row {
+            grid-template-columns: 1fr;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+    }
+</style>

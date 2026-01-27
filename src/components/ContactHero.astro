@@ -1,0 +1,158 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import ContactInfoCard from './ContactInfoCard.astro';
+import { contact } from '../data/Contact';
+
+interface Props {
+  image: ImageMetadata;
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  image,
+  title = 'Start Your Dance Journey',
+  subtitle = 'We are always welcome to calls, emails, or walk-ins to schedule a lesson, or send an email with the form below!',
+} = Astro.props;
+---
+
+<section class="contact-hero">
+  <div class="contact-hero-bg">
+    <Image src={image} alt="" class="contact-hero-image" />
+  </div>
+  <div class="contact-hero-overlay" aria-hidden="true"></div>
+  <div class="contact-hero-content">
+    <h1 class="contact-hero-title">{title}</h1>
+    <p class="contact-hero-subtitle">{subtitle}</p>
+    <div class="contact-hero-cards">
+      <ContactInfoCard
+        icon="phone"
+        mainText={contact.phoneDisplay}
+        href={`tel:${contact.phone.replace(/\D/g, '')}`}
+        variant="light"
+      />
+      <ContactInfoCard
+        icon="email"
+        mainText={contact.email}
+        href={`mailto:${contact.email}`}
+        variant="light"
+      />
+      <ContactInfoCard
+        icon="location"
+        mainText={contact.address.line1}
+        secondaryText={contact.address.line2}
+        variant="light"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .contact-hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .contact-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(1px);
+  }
+
+  .contact-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+  }
+
+  .contact-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 4rem 2rem;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+  }
+
+  .contact-hero-title {
+    font-size: 3.25rem;
+    font-weight: 700;
+    padding-top: 8rem;
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .contact-hero-subtitle {
+    font-size: 1.2rem;
+    padding-bottom: 2rem;
+    margin: 0 0 2.5rem 0;
+    line-height: 1.5;
+    opacity: 0.95;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-hero-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  .contact-hero-cards :global(.contact-info-card) {
+    width: 230px;
+  }
+
+  @media (max-width: 768px) {
+    .contact-hero {
+      min-height: auto;
+      padding: 3rem 0;
+    }
+
+    .contact-hero-title {
+      font-size: 3rem;
+    }
+
+    .contact-hero-subtitle {
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-hero-cards {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-hero-cards :global(.contact-info-card) {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-hero-content {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .contact-hero-title {
+      font-size: 2.8rem;
+    }
+  }
+</style>

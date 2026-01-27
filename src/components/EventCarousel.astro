@@ -41,13 +41,13 @@ const {
     </div>
 
     <div class="images-side">
-      <button class="nav-arrow prev" id="prev-btn" aria-label="Previous event">
+      <button class="nav-arrow prev" id="event-carousel-prev" aria-label="Previous event">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </button>
 
-      <div class="image-stack" id="image-stack">
+      <div class="image-stack" id="event-carousel-image-stack">
         {events.map((event, index) => (
           <div class="image-wrapper" data-index={index} class:list={[{ active: index === 0 }]}>
             <Image src={event.image} alt={event.title} class="event-image" />
@@ -55,7 +55,7 @@ const {
         ))}
       </div>
 
-      <button class="nav-arrow next" id="next-btn" aria-label="Next event">
+      <button class="nav-arrow next" id="event-carousel-next" aria-label="Next event">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
@@ -135,14 +135,12 @@ const {
 
   .event-date {
     font-size: 1.3rem;
-    font-weight: 600;
     margin: 0 0 0.5rem 0;
   }
 
   .event-time {
     font-size: 1.3rem;
-    font-weight: 600;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 0.5rem 0;
   }
 
   .event-description {
@@ -293,7 +291,7 @@ const {
     .content-side {
       text-align: center;
       align-items: normal;
-      padding: 0 15%;
+      padding: 0;
     }
 
     .event-info {
@@ -358,60 +356,61 @@ const {
 </style>
 
 <script>
-  let currentIndex = 0;
-  const eventSlides = document.querySelectorAll('.event-slide');
-  const imageWrappers = document.querySelectorAll('.image-wrapper');
-  const dots = document.querySelectorAll('.dot');
-  const totalSlides = eventSlides.length;
+  (function initEventCarousel() {
+    const carousel = document.querySelector('.event-carousel');
+    if (!carousel) return;
 
-  function showSlide(index: number) {
-    // Remove active class from all
-    eventSlides.forEach(slide => slide.classList.remove('active'));
-    imageWrappers.forEach(wrapper => wrapper.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
+    let currentIndex = 0;
+    const eventSlides = carousel.querySelectorAll('.event-slide');
+    const imageWrappers = carousel.querySelectorAll('.image-wrapper');
+    const dots = carousel.querySelectorAll('.dot');
+    const totalSlides = eventSlides.length;
 
-    // Add active class to current
-    eventSlides[index].classList.add('active');
-    imageWrappers[index].classList.add('active');
-    dots[index].classList.add('active');
+    function showSlide(index: number) {
+      if (totalSlides === 0) return;
+      const i = ((index % totalSlides) + totalSlides) % totalSlides;
 
-    currentIndex = index;
-  }
+      eventSlides.forEach(slide => slide.classList.remove('active'));
+      imageWrappers.forEach(wrapper => wrapper.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
 
-  function nextSlide() {
-    const next = (currentIndex + 1) % totalSlides;
-    showSlide(next);
-  }
+      eventSlides[i].classList.add('active');
+      imageWrappers[i].classList.add('active');
+      dots[i].classList.add('active');
 
-  function prevSlide() {
-    const prev = (currentIndex - 1 + totalSlides) % totalSlides;
-    showSlide(prev);
-  }
+      currentIndex = i;
+    }
 
-  // Event listeners
-  document.getElementById('next-btn')?.addEventListener('click', nextSlide);
-  document.getElementById('prev-btn')?.addEventListener('click', prevSlide);
+    function nextSlide() {
+      if (totalSlides === 0) return;
+      showSlide(currentIndex + 1);
+    }
 
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => showSlide(index));
-  });
+    function prevSlide() {
+      if (totalSlides === 0) return;
+      showSlide(currentIndex - 1);
+    }
 
-  // Auto-play (optional - remove if not wanted)
-  let autoplayInterval = setInterval(nextSlide, 5000);
+    carousel.querySelector('#event-carousel-next')?.addEventListener('click', nextSlide);
+    carousel.querySelector('#event-carousel-prev')?.addEventListener('click', prevSlide);
 
-  // Pause autoplay on hover
-  const carousel = document.querySelector('.event-carousel');
-  carousel?.addEventListener('mouseenter', () => {
-    clearInterval(autoplayInterval);
-  });
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showSlide(index));
+    });
 
-  carousel?.addEventListener('mouseleave', () => {
-    autoplayInterval = setInterval(nextSlide, 5000);
-  });
+    let autoplayInterval = setInterval(nextSlide, 5000);
 
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') prevSlide();
-    if (e.key === 'ArrowRight') nextSlide();
-  });
+    carousel.addEventListener('mouseenter', () => {
+      clearInterval(autoplayInterval);
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+      autoplayInterval = setInterval(nextSlide, 5000);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+  })();
 </script>

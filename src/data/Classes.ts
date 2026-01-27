@@ -7,70 +7,64 @@ import intensiveImage from '../assets/images/intensive.png';
 import smoothTechImage from '../assets/images/smooth_teq.png';
 import kidsImage from '../assets/images/classic_kids.png';
 import fridaySocialImage from '../assets/images/dance_social1.png';
+import tapImage1 from '../assets/images/tap_dance1.png';
+import tapImage2 from '../assets/images/tap_dance2.png';
+import saturdaySocialImage from '../assets/images/dance_social2.png';
 
 export interface ClassInfo {
   image: ImageMetadata;
   title: string;
   day: string;
   time: string;
-  link?: string;
 }
 
 export const classes: ClassInfo[] = [
   {
     image: latinTechImage,
     title: "Latin Technique",
-    day: "Tue.",
+    day: "Tuesday",
     time: "8:00 PM",
-    link: "/classes/latin_tech"
   },
   {
     image: intensiveImage,
     title: "Monthly Intensive",
-    day: "Wed.",
+    day: "Wednesday",
     time: "8:00 PM",
-    link: "/classes/intensive"
   },
   {
     image: smoothTechImage,
     title: "Smooth Technique",
     day: "Friday",
-    time: "8:00 PM - 9:30 PM",
-    link: "/classes/smooth_tech"
+    time: "8:00 PM",
   },
   {
     image: kidsImage,
     title: "Classic Kids",
     day: "Saturday",
-    time: "2:00 PM - 3:00 PM",
-    link: "/classes/classic_kids"
+    time: "5:00 PM",
   },
   {
     image: fridaySocialImage,
     title: "Friday Social",
     day: "Sunday",
-    time: "4:00 PM - 5:00 PM",
-    link: "/classes/swing"
+    time: "8:00 PM - 10:00 PM",
   },
   {
-    image: fridaySocialImage,
+    image: tapImage1,
     title: "Beginner Tap",
     day: "Sunday",
-    time: "4:00 PM - 5:00 PM",
-    link: "/classes/swing"
+    time: "10:00 AM",
   },
   {
-    image: fridaySocialImage,
+    image: saturdaySocialImage,
     title: "Intermediate Tap",
     day: "Sunday",
-    time: "4:00 PM - 5:00 PM",
-    link: "/classes/swing"
+    time: "11:00 AM",
   },
   {
-    image: fridaySocialImage,
+    image: tapImage2,
     title: "Saturday Social",
     day: "Sunday",
-    time: "4:00 PM - 5:00 PM",
-    link: "/classes/swing"
+    time: "7:00 PM - 9:30 PM",
   }
 ];

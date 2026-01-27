@@ -1,0 +1,9 @@
+export const contact = {
+  phone: '908-852-0090',
+  phoneDisplay: '908 - 852 - 0090',
+  email: 'Info@classicballroom.com',
+  address: {
+    line1: '6 Hastings Square Mall',
+    line2: 'Hackettstown, NJ 07840',
+  },
+} as const;

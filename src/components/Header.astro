@@ -34,6 +34,7 @@ const navLinks: NavLink[] = [
           {link.label}
         </a>
       ))}
+      <a href="/contact" class="nav-link contact-button-mobile">Contact Us</a>
     </nav>
 
     <a href="/contact" class="contact-button">
@@ -154,6 +155,10 @@ const navLinks: NavLink[] = [
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+.contact-button-mobile {
+  display: none;
+}
+
 .mobile-toggle {
   display: none;
   background: none;
@@ -245,6 +250,22 @@ const navLinks: NavLink[] = [
 
   .contact-button {
     display: none;
+  }
+
+  .contact-button-mobile {
+    display: block !important;
+    text-align: center;
+    background: #2c2c2c;
+    color: white !important;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    text-shadow: none !important;
+  }
+
+  .contact-button-mobile:hover {
+    background: #1a1a1a;
+    color: white !important;
   }
 
   .logo {

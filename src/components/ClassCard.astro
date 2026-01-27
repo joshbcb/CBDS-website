@@ -7,14 +7,12 @@ interface Props {
   title: string;
   day: string;
   time: string;
-  link?: string;
 }
 
-const { image, title, day, time, link } = Astro.props;
-const CardTag = link ? 'a' : 'div';
+const { image, title, day, time } = Astro.props;
 ---
 
-<CardTag href={link} class="class-card">
+<div class="class-card">
   <div class="image-side">
     <Image 
       src={image} 
@@ -30,13 +28,14 @@ const CardTag = link ? 'a' : 'div';
       <p class="time">{time}</p>
     </div>
   </div>
-</CardTag>
+</div>
 
 <style>
   .class-card {
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: minmax(90px, 2fr) minmax(140px, 3fr);
     width: 100%;
+    min-width: 0;
     background: white;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -74,12 +73,13 @@ const CardTag = link ? 'a' : 'div';
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: top;
+    align-items: start;
+    justify-content: start;
     gap: 0.5rem;
   }
 
   .class-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: white;
     margin: 0;
@@ -94,36 +94,29 @@ const CardTag = link ? 'a' : 'div';
 
   .day,
   .time {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
     line-height: 1.4;
   }
 
-  .day {
-    font-weight: 600;
-  }
-
-  .time {
+  .day, .time {
     font-weight: 400;
   }
 
   /* Responsive Design */
   @media (max-width: 768px) {
-    .class-card {
-      grid-template-columns: 1fr;
-    }
-
-    .image-side {
-      min-height: 180px;
-    }
-
     .text-side {
       padding: 1.5rem;
     }
 
     .class-title {
       font-size: 1.5rem;
+    }
+
+    .schedule {
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
     .day,
@@ -133,16 +126,12 @@ const CardTag = link ? 'a' : 'div';
   }
 
   @media (max-width: 480px) {
-    .image-side {
-      min-height: 150px;
-    }
-
     .text-side {
       padding: 1.25rem;
     }
 
     .class-title {
-      font-size: 1.35rem;
+      font-size: 1.15rem;
     }
   }
 </style>
