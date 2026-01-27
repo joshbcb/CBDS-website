@@ -1,6 +1,7 @@
 ---
 // ImageGallery.astro
 // Component for displaying image galleries with click-to-expand functionality
+import { baseUrl } from '../utils/url';
 
 interface Props {
   header: string;
@@ -18,7 +19,7 @@ const galleryId = `gallery-${Math.random().toString(36).substr(2, 9)}`;
     {images.map((imageSrc, index) => (
       <div class="image-item" data-index={index}>
         <img 
-          src={imageSrc} 
+          src={baseUrl(imageSrc)} 
           alt={`${header} - Image ${index + 1}`}
           loading="lazy"
         />
