@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import { baseUrl } from '../utils/url';
 
 interface Props {
     title: string;
@@ -32,7 +33,7 @@ const {
                 <div class="divider-line"></div>
             </div>
             <p class="subtitle">{subtitle}</p>
-            <a href={buttonLink} class="cta-button">{buttonText}</a>
+            <a href={baseUrl(buttonLink)} class="cta-button">{buttonText}</a>
         </div>
     </div>
 </section>

@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/images/CBDS_black_logo.jpg'; // Adjust path to your logo
+import { baseUrl } from '../utils/url';
 
 interface Props {
   transparent?: boolean;
@@ -24,20 +25,20 @@ const navLinks: NavLink[] = [
 
 <header class:list={['header', { transparent }]}>
   <div class="container">
-    <a href="/" class="logo-link">
+    <a href={baseUrl('/')} class="logo-link">
       <Image src={logo} alt="Classic Ballroom Dance Studio" class="logo" />
     </a>
     
     <nav class="nav" id="nav-menu">
       {navLinks.map(link => (
-        <a href={link.href} class="nav-link">
+        <a href={baseUrl(link.href)} class="nav-link">
           {link.label}
         </a>
       ))}
-      <a href="/contact" class="nav-link contact-button-mobile">Contact Us</a>
+      <a href={baseUrl('/contact')} class="nav-link contact-button-mobile">Contact Us</a>
     </nav>
 
-    <a href="/contact" class="contact-button">
+    <a href={baseUrl('/contact')} class="contact-button">
       Contact Us
     </a>
 

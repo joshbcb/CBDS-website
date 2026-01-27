@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 import { events } from "../data/Events.ts";
+import { baseUrl } from "../utils/url";
 
 export interface Event {
   title: string;
@@ -37,7 +38,7 @@ const {
           </div>
         ))}
       </div>
-      <a href={buttonLink} class="calendar-button">{buttonText}</a>
+      <a href={baseUrl(buttonLink)} class="calendar-button">{buttonText}</a>
     </div>
 
     <div class="images-side">
