@@ -1,71 +1,18 @@
 ---
 import ImageCard from './ImageCard.astro';
+import { services } from '../data/Services';
 
-// Configure number of columns here
 const columnsPerRow = 2;
-import lessonsImage from '../assets/images/dance_lesson_wide.png';
-import weddingsImage from '../assets/images/dance_wedding_wide.png';
-import tapImage from '../assets/images/tap.png';
-import competitionImage from '../assets/images/dance_comp.png';
-import countryImage from '../assets/images/country_line_dance.png';
-import partyImage from '../assets/images/themed_party.png';
-import kidsImage from '../assets/images/kids_dance.png';
-import socialImage from '../assets/images/dance_social.png'
-import performanceImage from '../assets/images/dance_performance.png'
-import groupImage from '../assets/images/dance_gc.png'
 ---
 
 <div class="card-row" style={`--columns: ${columnsPerRow};`}>
-	<ImageCard 
-		image={lessonsImage} 
-		title="Dance Lessons" 
-		hoverText="Learn to dance by yourself or with a partner with any of our experienced instructors.<br><br>Progress through our syllabus, learning steps from social foundation up to gold and open level.<br><br>Learn the Waltz, Cha Cha, Hustle, and many, many more!"
+	{services.map((service) => (
+		<ImageCard
+			image={service.image}
+			title={service.title}
+			hoverText={service.hoverText}
 		/>
-	<ImageCard 
-		image={weddingsImage} 
-		title="Wedding Dances" 
-		hoverText="Learn to dance the perfect wedding dance with your partner.<br><br>We offer a variety of wedding dance packages, including private lessons, group classes, and choreography services."
-	/>
-	<ImageCard 
-		image={tapImage} 
-		title="Tap Dance" 
-		hoverText="Have fun learning the art of tap dancing at a beginner or intermediate level.<br><br>We offer a variety of tap dance packages, including private lessons, group classes, and choreography services."
-	/>
-	<ImageCard 
-		image={competitionImage} 
-		title="Competitions" 
-		hoverText="Compete with our experienced instructors at various competitions throughout the year.<br><br>We offer a variety of competition packages, including private lessons, group classes, and choreography services."
-	/>
-    <ImageCard 
-		image={countryImage} 
-		title="Country Line Dance" 
-		hoverText="Learn to country line dance with our experienced instructors.<br><br>We offer a variety of country line dance packages, including private lessons, group classes, and choreography services."
-	/>
-	<ImageCard 
-		image={partyImage} 
-		title="Themed Parties" 
-		hoverText="Join us for fun social events hosted regularly by Classic Ballroom!<br><br>From holidays, to parties and special events, we have something for everyone."
-	/>
-	<ImageCard 
-		image={kidsImage} 
-		title="Classic Kids" 
-		hoverText="We offer a beginner friendly group class for kids ages 5-17 to start or continue their dance journey.<br><br>Kids are always welcome to take private lessons, group classes, competitions, and showcases as well."
-	/>
-	<ImageCard 
-		image={socialImage} 
-		title="Themed Parties" 
-		hoverText="Host a themed party with your friends and family.<br><br>We offer a variety of themed party packages, including private lessons, group classes, and choreography services."
-	/>
-	<ImageCard 
-		image={performanceImage} 
-		title="Showcases" 
-		hoverText="Perform in our either of our spring and fall showcases.<br><br>We offer a variety of showcase packages, including private lessons, group classes, and choreography services."
-	/>
-	<ImageCard 
-		image={groupImage} 
-		title="Group Classes" 
-		hoverText="Join us almost every day of the week for group classes, ranging from ballroom and latin technique, to tap and country line dance.<br><br>We offer a variety of group classes, including private lessons, group classes, and choreography services."
-	/>
+	))}
 </div>
 
 <style>

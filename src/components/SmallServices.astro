@@ -1,34 +1,24 @@
 ---
 import ImageCard from './ImageCard.astro';
+import { getServicesForSmallSection } from '../data/Services';
 
-// Configure number of columns here
 const columnsPerRow = 3;
-import lessonsImage from '../assets/images/dance_lesson_wide.png';
-import weddingsImage from '../assets/images/dance_wedding_wide.png';
-import performanceImage from '../assets/images/dance_performance.png'
+const smallServices = getServicesForSmallSection();
 ---
 <section class="small-services">
     <div class="small-services-inner">
         <div class="text-container">
             <h2 class="section-title">SEE YOURSELF ON THE DANCE FLOOR!</h2>
-            <p class="section-description">Explore our many programs and services to find what excites you! From group and private lessons, to showcases, competitions, and special events, you are sure to find what's right for you. 
+            <p class="section-description">Explore our many programs and services to find what excites you! From group and private lessons, to showcases, competitions, and special events, you are sure to find what's right for you.
         </div>
         <div class="card-row" style={`--columns: ${columnsPerRow};`}>
-            <ImageCard 
-                image={lessonsImage} 
-                title="Dance Lessons" 
-                hoverText="Learn to dance by yourself or with a partner with any of our experienced instructors.<br><br>Progress through our syllabus, learning steps from social foundation up to gold and open level.<br><br>Learn the Waltz, Cha Cha, Hustle, and many, many more!"
-            />
-            <ImageCard 
-                image={weddingsImage} 
-                title="Wedding Dances" 
-                hoverText="Learn to dance the perfect wedding dance with your partner.<br><br>We offer a variety of wedding dance packages, including private lessons, group classes, and choreography services."
-            />
-            <ImageCard 
-                image={performanceImage} 
-                title="Showcases" 
-                hoverText="Perform in our either of our spring and fall showcases.<br><br>We offer a variety of showcase packages, including private lessons, group classes, and choreography services."
-            />
+            {smallServices.map((service) => (
+                <ImageCard
+                    image={service.image}
+                    title={service.title}
+                    hoverText={service.hoverText}
+                />
+            ))}
         </div>
     </div>
 </section>

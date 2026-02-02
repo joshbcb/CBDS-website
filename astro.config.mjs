@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   // Required for GitHub Pages when the site is at username.github.io/REPO_NAME/
   // Use '/' if this is a user/org site (username.github.io).
-  base: '/CBDS-website/',
+  base: '/',
   vite: {
     plugins: [tailwindcss()]
   }
