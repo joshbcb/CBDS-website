@@ -85,12 +85,16 @@ The site uses **Decap CMS** (formerly Netlify CMS). Content is stored in **`cont
 5. **Invite editors:**  
    - In **Identity** → **Invite users**, add the email addresses of people who should edit content. They’ll get an invite email; after they set a password, they can log in at `/admin`.
 
+### Invite flow (set password)
+
+The **Netlify Identity widget** is included on every page (in the main layout) so that when someone clicks the invite link (with `#invite_token=...` in the URL), the widget opens and they can set their password. If invite links only showed a token in the URL and no “set password” step, the widget was not on the page they landed on—adding it to the layout fixes that. After they set a password, they’re redirected to `/admin`.
+
 ### Using the CMS
 
 - Open **`https://your-site.netlify.app/admin`** (or your custom domain + `/admin`).
 - Log in with a Netlify Identity account (invited user).
 - Edit **Contact**, **Events**, **Staff**, **Services**, **Classes**, or **Calendars**. Changes are saved as commits to your repo; the next Netlify deploy will publish them.
-- **Images:** Use the image field in the CMS to upload files; they’re stored in **`public/uploads`**. If a field is empty, the site shows a placeholder until you add an image.
+- **Images:** Use the image field in the CMS to upload files; they’re stored in **`public/uploads`**. The site ships with images in **`public/uploads/events`**, **`public/uploads/staff`**, **`public/uploads/services`**, **`public/uploads/classes`**, and **`public/uploads/calendars`** so service cards, events, staff, classes, and calendars show images by default. New uploads go to **`public/uploads`** (path in content: `/uploads/...`).
 
 ### If your repo branch is not `main`
 

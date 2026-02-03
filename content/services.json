@@ -4,61 +4,61 @@
       "id": "lessons",
       "title": "Dance Lessons",
       "hoverText": "Whether you're flying solo or stepping out with a partner, our instructors meet you where you are. <br><br>Move at your pace from social foundation through gold and open—Waltz, Cha Cha, Hustle, and beyond. Your journey, your style.",
-      "image": ""
+      "image": "/uploads/services/dance_lesson_wide.png"
     },
     {
       "id": "weddings",
       "title": "Wedding Dances",
       "hoverText": "Your first dance should feel like yours. <br><br>We design a wedding dance that fits your song, your story, and your comfort level—from a simple sway to full choreography. Private lessons and packages tailored to your big day.",
-      "image": ""
+      "image": "/uploads/services/dance_wedding_wide.png"
     },
     {
       "id": "tap",
       "title": "Tap Dance",
       "hoverText": "Find your rhythm from the ground up. Our tap program welcomes beginners and intermediates alike—learn technique, timing, and style in a supportive setting. <br><br>Private and group options available.",
-      "image": ""
+      "image": "/uploads/services/tap.png"
     },
     {
       "id": "competitions",
       "title": "Competitions",
       "hoverText": "Ready to take the floor? Train with our coaches and compete at events throughout the year. <br><br>We'll help you polish technique, build routines, and step onto the podium with confidence.",
-      "image": ""
+      "image": "/uploads/services/dance_comp.png"
     },
     {
       "id": "country",
       "title": "Country Line Dance",
       "hoverText": "No partner required—just bring your boots and your energy. <br><br>Our country line dance classes get everyone moving together. Learn classic and current line dances in a fun, social atmosphere.",
-      "image": ""
+      "image": "/uploads/services/country_line_dance.png"
     },
     {
       "id": "parties",
       "title": "Themed Parties",
       "hoverText": "Join us for fun social events hosted regularly by Classic Ballroom!<br><br>From holidays, to parties and special events, we have something for everyone.",
-      "image": ""
+      "image": "/uploads/services/themed_party.png"
     },
     {
       "id": "kids",
       "title": "Classic Kids",
       "hoverText": "Ages 5–17: start here with our beginner-friendly group class, then grow with us. <br><br>Kids can add private lessons, group classes, competitions, and showcases whenever they're ready. Dance becomes a lifelong adventure.",
-      "image": ""
+      "image": "/uploads/services/kids_dance.png"
     },
     {
       "id": "social",
       "title": "Social Events",
       "hoverText": "Dance isn't just lessons—it's community. Join us for holidays, parties, and special events throughout the year. <br><br>No experience needed; just show up, meet other dancers, and have a great time.",
-      "image": ""
+      "image": "/uploads/services/dance_social.png"
     },
     {
       "id": "showcases",
       "title": "Showcases",
       "hoverText": "Take the spotlight in our spring and fall showcases. <br><br>Work with us on learning choreography, technique, and stage presence—then perform for family and friends. A milestone you'll remember.",
-      "image": ""
+      "image": "/uploads/services/dance_performance.png"
     },
     {
       "id": "group",
       "title": "Group Classes",
       "hoverText": "Drop in almost any day: ballroom and Latin technique, tap, country line dance, and more. <br><br>Learn in a group, make friends, and build skills at a fraction of the cost. Check the calendar and find your class.",
-      "image": ""
+      "image": "/uploads/services/dance_gc.png"
     }
   ]
 }

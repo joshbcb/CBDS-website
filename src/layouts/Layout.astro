@@ -10,9 +10,29 @@ import cbdsLogo from '../assets/images/CBDS_black_logo.jpg';
 		<link rel="icon" type="image/jpeg" href={cbdsLogo.src} />
 		<meta name="generator" content={Astro.generator} />
 		<title>Classic Ballroom Dance Studio</title>
+		<!-- Netlify Identity: required so invite links (with #invite_token) show the "set password" flow -->
+		<script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 	</head>
 	<body>
 		<slot />
+		<!-- Invite flow: open widget when URL has #invite_token=... so user can set password; then redirect to /admin -->
+		<script is:inline>
+			(function() {
+				var hash = window.location.hash || '';
+				if (hash.indexOf('invite_token') !== -1 || hash.indexOf('recovery_token') !== -1) {
+					window.addEventListener('load', function() {
+						if (window.netlifyIdentity) {
+							window.netlifyIdentity.on('init', function() {
+								window.netlifyIdentity.open();
+							});
+							window.netlifyIdentity.on('login', function() {
+								window.location.href = '/admin/';
+							});
+						}
+					});
+				}
+			})();
+		</script>
 	</body>
 </html>
 
