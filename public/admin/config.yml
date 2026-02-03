@@ -1,0 +1,117 @@
+# Decap CMS (Netlify CMS) – Classic Ballroom
+# Docs: https://decapcms.org/docs/configuration-options/
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Uncomment if your repo is on a different branch:
+# branch: master
+
+media_folder: "public/uploads"
+public_path: "/uploads"
+
+locale: "en"
+
+collections:
+  - name: "contact"
+    label: "Contact"
+    files:
+      - name: "contact"
+        label: "Contact info"
+        file: "content/contact.json"
+        fields:
+          - { name: "phone", label: "Phone", widget: "string" }
+          - { name: "phoneDisplay", label: "Phone (display)", widget: "string", required: false }
+          - { name: "email", label: "Email", widget: "string" }
+          - label: "Address"
+            name: "address"
+            widget: "object"
+            fields:
+              - { name: "line1", label: "Line 1", widget: "string" }
+              - { name: "line2", label: "Line 2", widget: "string" }
+
+  - name: "events"
+    label: "Events"
+    files:
+      - name: "events"
+        label: "Events"
+        file: "content/events.json"
+        fields:
+          - name: "events"
+            label: "Events"
+            widget: "list"
+            fields:
+              - { name: "title", label: "Title", widget: "string" }
+              - { name: "date", label: "Date", widget: "string" }
+              - { name: "time", label: "Time", widget: "string" }
+              - { name: "description", label: "Description", widget: "text" }
+              - { name: "image", label: "Image", widget: "image", required: false }
+
+  - name: "staff"
+    label: "Staff"
+    files:
+      - name: "staff"
+        label: "Staff"
+        file: "content/staff.json"
+        fields:
+          - name: "staff"
+            label: "Staff"
+            widget: "list"
+            fields:
+              - { name: "name", label: "Name", widget: "string" }
+              - { name: "title", label: "Title", widget: "string" }
+              - { name: "bio", label: "Bio", widget: "text" }
+              - { name: "image", label: "Photo", widget: "image", required: false }
+
+  - name: "services"
+    label: "Services"
+    files:
+      - name: "services"
+        label: "Services"
+        file: "content/services.json"
+        fields:
+          - name: "services"
+            label: "Services"
+            widget: "list"
+            fields:
+              - { name: "id", label: "ID (slug)", widget: "string", hint: "e.g. lessons, weddings" }
+              - { name: "title", label: "Title", widget: "string" }
+              - { name: "hoverText", label: "Hover / description", widget: "text" }
+              - { name: "image", label: "Image", widget: "image", required: false }
+
+  - name: "classes"
+    label: "Classes (schedule)"
+    files:
+      - name: "classes"
+        label: "Classes"
+        file: "content/classes.json"
+        fields:
+          - name: "classes"
+            label: "Classes"
+            widget: "list"
+            fields:
+              - { name: "title", label: "Title", widget: "string" }
+              - { name: "day", label: "Day", widget: "string" }
+              - { name: "time", label: "Time", widget: "string" }
+              - { name: "image", label: "Image", widget: "image", required: false }
+
+  - name: "calendars"
+    label: "Calendars"
+    files:
+      - name: "calendars"
+        label: "Current & next month"
+        file: "content/calendars.json"
+        fields:
+          - label: "Current month"
+            name: "currentMonth"
+            widget: "object"
+            fields:
+              - { name: "name", label: "Label (e.g. January 2026)", widget: "string" }
+              - { name: "image", label: "Calendar image", widget: "image", required: false }
+          - label: "Next month"
+            name: "nextMonth"
+            widget: "object"
+            fields:
+              - { name: "name", label: "Label", widget: "string" }
+              - { name: "image", label: "Calendar image", widget: "image", required: false }

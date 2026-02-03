@@ -28,7 +28,7 @@ const {
     <div class="contact-hero-cards">
       <ContactInfoCard
         icon="phone"
-        mainText={contact.phoneDisplay}
+        mainText={contact.phoneDisplay ?? contact.phone}
         href={`tel:${contact.phone.replace(/\D/g, '')}`}
         variant="light"
       />

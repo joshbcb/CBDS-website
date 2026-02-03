@@ -1,12 +1,9 @@
 ---
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-
 export interface StaffMember {
   name: string;
   title: string;
   bio: string;
-  image: ImageMetadata;
+  image: string;
 }
 
 interface Props {
@@ -38,12 +35,16 @@ const {
           class:list={[{ active: index === 0 }]}
           aria-label={`View ${member.name}'s bio`}
         >
-          <Image 
-            src={member.image} 
-            alt={member.name} 
-            class="staff-photo"
-            loading={index < 6 ? "eager" : "lazy"}
-          />
+          {member.image ? (
+            <img 
+              src={member.image} 
+              alt={member.name} 
+              class="staff-photo"
+              loading={index < 6 ? "eager" : "lazy"}
+            />
+          ) : (
+            <div class="staff-photo staff-photo-placeholder" aria-hidden="true" />
+          )}
           <div class="photo-overlay"></div>
         </button>
       ))}

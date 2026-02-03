@@ -1,10 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-
 export interface CalendarMonth {
   name: string;
-  image: ImageMetadata;
+  image: string;
 }
 
 interface Props {
@@ -27,18 +24,10 @@ const { currentMonth, nextMonth } = Astro.props;
 
   <div class="calendar-display">
     <div class="calendar-wrapper active" data-month="current">
-      <Image 
-        src={currentMonth.image} 
-        alt={`${currentMonth.name} Calendar`}
-        class="calendar-image"
-      />
+      {currentMonth.image ? <img src={currentMonth.image} alt={`${currentMonth.name} Calendar`} class="calendar-image" /> : <div class="calendar-image calendar-image-placeholder" aria-hidden="true" />}
     </div>
     <div class="calendar-wrapper" data-month="next">
-      <Image 
-        src={nextMonth.image} 
-        alt={`${nextMonth.name} Calendar`}
-        class="calendar-image"
-      />
+      {nextMonth.image ? <img src={nextMonth.image} alt={`${nextMonth.name} Calendar`} class="calendar-image" /> : <div class="calendar-image calendar-image-placeholder" aria-hidden="true" />}
     </div>
   </div>
 </section>

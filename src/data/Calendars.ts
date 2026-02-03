@@ -1,22 +1,10 @@
-// src/data/calendars.ts
-import type { ImageMetadata } from 'astro';
-
-// Import calendar images (can be PDF screenshots or images)
-import januaryCalendar from '../assets/images/calendars/jan26.png';
-import decemberCalendar from '../assets/images/calendars/dec25.png';
+// CMS-backed: content/calendars.json (editable via /admin)
+import calendarsData from '../../content/calendars.json';
 
 export interface CalendarMonth {
   name: string;
-  image: ImageMetadata;
+  image: string;
 }
 
-// Update these monthly as needed
-export const currentMonth: CalendarMonth = {
-  name: "January 2026",
-  image: januaryCalendar
-};
-
-export const nextMonth: CalendarMonth = {
-  name: "December 2025",
-  image: decemberCalendar
-};
+export const currentMonth: CalendarMonth = calendarsData.currentMonth;
+export const nextMonth: CalendarMonth = calendarsData.nextMonth;

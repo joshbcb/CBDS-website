@@ -31,6 +31,73 @@ If the client’s site is currently on Adobe (e.g. Adobe Business Catalyst or si
 
 ---
 
+## 1b. Netlify + Network Solutions: Changing Nameservers (Step-by-Step)
+
+Use this when the site is on **Netlify** and the domain is registered at **Network Solutions**. You point the domain to Netlify by switching to Netlify’s nameservers.
+
+### In Netlify
+
+1. Log in at [app.netlify.com](https://app.netlify.com).
+2. Open the **site** that will use the custom domain (e.g. classicballroom.com).
+3. Go to **Domain management** (or **Domain settings** / **Domains** in the site menu).
+4. Click **Add custom domain** (or **Add domain** / **Add a domain**) and add your domain (e.g. `classicballroom.com`). Add `www.classicballroom.com` too if you use www.
+5. Netlify will show **DNS configuration**. Choose the option to use **Netlify DNS** (e.g. “Set up Netlify DNS” or “Use Netlify nameservers”).
+6. Open **DNS** in the left sidebar (team/site level). Select the domain you added.
+7. In the **Name servers** panel, copy the **four nameservers** Netlify shows. They look like:
+   - `dns1.p01.nsone.net`
+   - `dns2.p01.nsone.net`
+   - `dns3.p01.nsone.net`
+   - `dns4.p01.nsone.net`  
+   (Your values will be different; use exactly what Netlify shows.)
+8. **Before leaving:** If the domain currently has email or other DNS records (MX, etc.), add those in Netlify’s DNS panel first so you don’t lose email when you switch nameservers.
+
+### In Network Solutions
+
+1. Log in at [www.networksolutions.com](https://www.networksolutions.com) → **Sign In** / **My Account**.
+2. Go to **Domains** (or **Domain Names**) and find the domain (e.g. classicballroom.com).
+3. Click the domain to manage it.
+4. Find **Nameservers** (often under **Advanced Tools**, **DNS**, or **Domain Settings**). Click **Manage** or **Edit** next to “Nameservers” / “Nameserver (DNS)”.
+5. Choose **Custom nameservers** (or “I have specific nameservers”) and remove the current ones (e.g. NS1.SERVER284.COM, NS2.SERVER284.COM).
+6. Enter the **four Netlify nameservers** you copied, one per line.
+7. Save. Network Solutions may show a warning that changing nameservers can affect email/website; confirm if prompted.
+
+### After you save
+
+- **Propagation:** DNS can take from a few minutes up to 24–48 hours. Netlify will show the domain as “Pending” or “Waiting for DNS” until it sees the new nameservers.
+- **SSL:** Once DNS is pointing to Netlify, Netlify will issue an HTTPS certificate automatically. Test `https://classicballroom.com` and `https://www.classicballroom.com` after propagation.
+
+---
+
+## 1c. Enabling the CMS on Netlify (Decap / Netlify CMS)
+
+The site uses **Decap CMS** (formerly Netlify CMS). Content is stored in **`content/*.json`** and edited at **`/admin`** (e.g. `https://yoursite.netlify.app/admin` or `https://classicballroom.com/admin`).
+
+### One-time setup in Netlify
+
+1. In the **Netlify dashboard**, open your site.
+2. Go to **Site configuration** (or **Settings**) → **Integrations** (or **Identity**).
+3. **Enable Netlify Identity:**  
+   - Open **Identity** and click **Enable Identity** (or **Invite users**).  
+   - Under **Registration preferences**, choose **Invite only** (recommended) so only people you invite can log in, or **Open** for self-signup.
+4. **Enable Git Gateway:**  
+   - Go to **Identity** → **Services** (or **Applications and usage**).  
+   - Find **Git Gateway** and click **Enable**. This lets the CMS write to your Git repo without giving editors full repo access.
+5. **Invite editors:**  
+   - In **Identity** → **Invite users**, add the email addresses of people who should edit content. They’ll get an invite email; after they set a password, they can log in at `/admin`.
+
+### Using the CMS
+
+- Open **`https://your-site.netlify.app/admin`** (or your custom domain + `/admin`).
+- Log in with a Netlify Identity account (invited user).
+- Edit **Contact**, **Events**, **Staff**, **Services**, **Classes**, or **Calendars**. Changes are saved as commits to your repo; the next Netlify deploy will publish them.
+- **Images:** Use the image field in the CMS to upload files; they’re stored in **`public/uploads`**. If a field is empty, the site shows a placeholder until you add an image.
+
+### If your repo branch is not `main`
+
+Edit **`public/admin/config.yml`** and set `branch` to your default branch (e.g. `master`).
+
+---
+
 ## 2. Should You Pick Your Own Host or Use Theirs?
 
 | Use **your/host’s platform** (e.g. Netlify) | Use **client’s** existing host |

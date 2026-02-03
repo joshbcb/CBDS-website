@@ -1,9 +1,9 @@
-export const contact = {
-  phone: '908-852-0090',
-  phoneDisplay: '908 - 852 - 0090',
-  email: 'Info@classicballroom.com',
-  address: {
-    line1: '6 Hastings Square Mall',
-    line2: 'Hackettstown, NJ 07840',
-  },
-} as const;
+// CMS-backed: content/contact.json (editable via /admin)
+import contactData from '../../content/contact.json';
+
+export const contact = contactData as {
+  phone: string;
+  phoneDisplay?: string;
+  email: string;
+  address: { line1: string; line2: string };
+};

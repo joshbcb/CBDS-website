@@ -1,17 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-
-import { events } from "../data/Events.ts";
+import { events } from "../data/Events";
 import { baseUrl } from "../utils/url";
-
-export interface Event {
-  title: string;
-  date: string;
-  time: string;
-  description: string;
-  image: ImageMetadata;
-}
 
 interface Props {
   buttonText?: string;
@@ -51,7 +40,7 @@ const {
       <div class="image-stack" id="event-carousel-image-stack">
         {events.map((event, index) => (
           <div class="image-wrapper" data-index={index} class:list={[{ active: index === 0 }]}>
-            <Image src={event.image} alt={event.title} class="event-image" />
+            {event.image ? <img src={event.image} alt={event.title} class="event-image" /> : <div class="event-image event-image-placeholder" aria-hidden="true" />}
           </div>
         ))}
       </div>

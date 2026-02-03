@@ -1,0 +1,12 @@
+{
+  "classes": [
+    { "title": "Latin Technique", "day": "Tuesday", "time": "8:00 PM", "image": "" },
+    { "title": "Monthly Intensive", "day": "Wednesday", "time": "8:00 PM", "image": "" },
+    { "title": "Smooth Technique", "day": "Friday", "time": "8:00 PM", "image": "" },
+    { "title": "Classic Kids", "day": "Saturday", "time": "5:00 PM", "image": "" },
+    { "title": "Friday Social", "day": "Sunday", "time": "8:00 PM - 10:00 PM", "image": "" },
+    { "title": "Beginner Tap", "day": "Sunday", "time": "10:00 AM", "image": "" },
+    { "title": "Intermediate Tap", "day": "Sunday", "time": "11:00 AM", "image": "" },
+    { "title": "Saturday Social", "day": "Sunday", "time": "7:00 PM - 9:30 PM", "image": "" }
+  ]
+}
