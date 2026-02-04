@@ -1,11 +1,12 @@
 {
   "classes": [
     { "title": "Latin Technique", "day": "Tuesday", "time": "8:00 PM", "image": "/uploads/classes/latin_tech.png" },
-    { "title": "Monthly Intensive", "day": "Wednesday", "time": "8:00 PM", "image": "/uploads/classes/intensive.png" },
-    { "title": "Smooth Technique", "day": "Friday", "time": "8:00 PM", "image": "/uploads/classes/smooth_teq.png" },
-    { "title": "Classic Kids", "day": "Tuesday", "time": "5:00 PM", "image": "/uploads/classes/classic_kids.png" },
-    { "title": "Friday Social", "day": "Friday", "time": "8:00 PM - 10:00 PM", "image": "/uploads/classes/dance_social1.png" },
-    { "title": "Tap Class", "day": "Saturday", "time": "11:00 AM", "image": "/uploads/classes/tap_dance2.png" },
-    { "title": "Saturday Social", "day": "Saturday", "time": "7:00 PM - 9:30 PM", "image": "/uploads/classes/dance_social2.png" }
+    { "title": "Viennese Waltz Intensive", "day": "Wednesday", "time": "8:00 PM", "image": "/uploads/classes/intensive.png" },
+    { "title": "Smooth Technique", "day": "Thursday", "time": "8:00 PM", "image": "/uploads/classes/smooth_teq.png" },
+    { "title": "Classic Kids", "day": "Wednesday", "time": "5:00 PM", "image": "/uploads/classes/classic_kids.png" },
+    { "title": "Friday Group/Social", "day": "Friday", "time": "8:00 PM - 10:00 PM", "image": "/uploads/classes/dance_social1.png" },
+    { "title": "Beginner Tap", "day": "Saturaday", "time": "10:00 AM", "image": "/uploads/classes/tap_dance1.png" },
+    { "title": "Intermediate Tap", "day": "Saturday", "time": "11:00 AM", "image": "/uploads/classes/tap_dance2.png" },
+    { "title": "Saturday Group/Social", "day": "Saturday", "time": "7:00 PM - 9:30 PM", "image": "/uploads/classes/dance_social2.png" }
   ]
 }
