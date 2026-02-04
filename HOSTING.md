@@ -160,6 +160,24 @@ These help with deliverability and fix “DKIM = did not pass” in Gmail:
 
 After DNS propagates, SPF + DKIM should both pass for Gmail.
 
+### Mail client settings (Outlook, Thunderbird, Apple Mail, phone)
+
+Use these when setting up **@classicballroom.com** in an email program (Microsoft Outlook, Mozilla Thunderbird, Apple Mail, or a phone):
+
+| Setting | Value |
+|--------|--------|
+| **Incoming server (IMAP)** | mail.server284.com |
+| **Incoming (IMAP) port** | 993 (SSL) |
+| **Incoming (POP3) port** | 995 (SSL) |
+| **Outgoing server (SMTP)** | mail.server284.com |
+| **Outgoing (SMTP) SSL/TLS** | Port 465, or port 587 with STARTTLS |
+| **Authentication** | Yes (use full email and mailbox password) |
+
+- **Requires SSL:** Yes (incoming and outgoing).
+- **Requires TLS:** Yes if available (outgoing).
+- **Username:** Full email (e.g. josh@classicballroom.com, susan@classicballroom.com).
+- **Password:** The mailbox password for that address.
+
 ### Webmail after the switch
 
 If you had **www.classicballroom.com/webmail** (or similar) on the old host, that path no longer exists once the site is on Netlify. A redirect is set up so that **/webmail** and **/webmail/** send users to your email provider’s webmail login.

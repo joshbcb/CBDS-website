@@ -1,4 +1,7 @@
-# Redirect /webmail to mail.classicballroom.com (ICDSoft/server284 Roundcube).
-# In Netlify DNS: CNAME "mail" -> mail.server284.com so this URL resolves.
-/webmail    https://mail.classicballroom.com    302!
-/webmail/   https://mail.classicballroom.com    302!
+# Webmail: Roundcube at ICDSoft/server284 (direct URL).
+/webmail    https://mbox.server284.com/roundcube/    302!
+/webmail/   https://mbox.server284.com/roundcube/    302!
+
+# Control panel: ICDSoft/server284 panel.
+/cp         https://panel.server284.com/    302!
+/cp/        https://panel.server284.com/    302!
