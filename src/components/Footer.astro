@@ -1,7 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/images/CBDS_black_logo.jpg';
-
 interface ContactInfo {
     phone: string;
     email: string;
@@ -35,7 +32,7 @@ const socialLinks: SocialLink[] = [
 <footer class="footer">
     <div class="container">
         <div class="logo-section">
-            <Image src={logo} alt="Classic Ballroom Dance Studio" class="logo" />
+            <img src="/images/CBDS_black_logo.jpg" alt="Classic Ballroom Dance Studio" class="logo" width="180" height="60" />
         </div>
 
         <div class="contact-section">

@@ -1,11 +1,9 @@
 ---
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
 import ContactInfoCard from './ContactInfoCard.astro';
 import { contact } from '../data/Contact';
 
 interface Props {
-  image: ImageMetadata;
+  image: string;
   title?: string;
   subtitle?: string;
 }
@@ -19,7 +17,7 @@ const {
 
 <section class="contact-hero">
   <div class="contact-hero-bg">
-    <Image src={image} alt="" class="contact-hero-image" />
+    <img src={image} alt="" class="contact-hero-image" />
   </div>
   <div class="contact-hero-overlay" aria-hidden="true"></div>
   <div class="contact-hero-content">

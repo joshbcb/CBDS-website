@@ -4,13 +4,11 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ContactHero from "../components/ContactHero.astro";
 import ContactForm from "../components/ContactForm.astro";
-
-import contactHeroImage from "../assets/images/maru_dancing.jpg";
 ---
 
 <Layout>
   <Header transparent={true}/>
-  <ContactHero image={contactHeroImage} />
+  <ContactHero image="/images/maru_dancing.jpg" />
   <ContactForm />
   <Footer />
 </Layout>

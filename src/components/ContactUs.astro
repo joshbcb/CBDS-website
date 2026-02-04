@@ -1,7 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import contactImage from '../assets/images/garnerbanner.jpg'; // Replace with your actual image
-
 interface Props {
   title?: string;
   subtitle?: string;
@@ -59,8 +56,8 @@ const {
     </div>
     
     <div class="image-side">
-      <Image 
-        src={contactImage} 
+      <img 
+        src="/images/garnerbanner.jpg" 
         alt="Ballroom dancers" 
         class="contact-image"
       />

@@ -1,12 +1,10 @@
 ---
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
 import { baseUrl } from '../utils/url';
 
 interface Props {
     title: string;
     subtitle: string;
-    image: ImageMetadata;
+    image: string;
     buttonText?: string;
     buttonLink?: string;
 }
@@ -22,7 +20,7 @@ const {
 
 <section class="hero">
     <div class="hero-image-container">
-        <Image src={image} alt="Hero Image" class="hero-image" />
+        <img src={image} alt="Hero Image" class="hero-image" />
     </div>
     <div class="overlay">
         <div class="hero-content">
