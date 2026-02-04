@@ -1,9 +1,4 @@
-# Redirect /webmail to your email provider's webmail login.
-# Currently set to Network Solutions (domain is registered there).
-# If login still fails, try one of these and replace the URL below:
-#   - Network Solutions (alt): https://webmail.networksolutionsemail.com/appsuite/
-#   - Web.com account (then open email): https://www.web.com/my-account/login?webmaillogin=true
-#   - SecureServer: https://webmail.secureserver.net
-# Or contact Network Solutions (1-888-793-7657) or Web.com support and ask for the webmail URL for classicballroom.com.
-/webmail    https://www.networksolutionsemail.com/edgedesk/cgi-bin/login.exe?xsl=login.xsl&bind=&tpl=mg_netsol&nodetect=1    302!
-/webmail/   https://www.networksolutionsemail.com/edgedesk/cgi-bin/login.exe?xsl=login.xsl&bind=&tpl=mg_netsol&nodetect=1    302!
+# Redirect /webmail to mail.classicballroom.com (matches old setup: MX pointed to mail.classicballroom.com).
+# Once CNAME "mail" -> mail.classicballroom.com.webcommail.net is in Netlify DNS, this URL will load webmail.
+/webmail    https://mail.classicballroom.com    302!
+/webmail/   https://mail.classicballroom.com    302!
