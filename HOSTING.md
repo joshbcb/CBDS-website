@@ -70,9 +70,99 @@ Use this when the site is on **Netlify** and the domain is registered at **Netwo
 
 If you had **www.classicballroom.com/webmail** (or similar) on the old host, that path no longer exists once the site is on Netlify. A redirect is set up so that **/webmail** and **/webmail/** send users to your email provider’s webmail login.
 
-- **Redirect file:** `public/_redirects` sends `/webmail` → `https://webmail.secureserver.net` (common for Web.com / SecureServer). After you deploy, **www.classicballroom.com/webmail** will redirect there.
-- **If your webmail is elsewhere:** Edit `public/_redirects` and replace the URL with the one your email host gave you (e.g. Network Solutions: `https://networksolutionsemail.com/edgedesk/cgi-bin/login.exe`, or the exact link from your provider).
-- **Using webmail.classicballroom.com:** If you prefer that subdomain, add a **CNAME** in Netlify DNS: **webmail** → the hostname your provider specifies (e.g. `webmail.secureserver.net`). Then you can change the redirect to `https://webmail.classicballroom.com` if you like.
+- **Redirect file:** `public/_redirects` currently sends `/webmail` → **Network Solutions webmail** (https://www.networksolutionsemail.com/...), since the domain is registered with Network Solutions. Deploy and try **www.classicballroom.com/webmail**; log in with your full email address (e.g. josh@classicballroom.com) and mailbox password.
+- **If that login doesn’t work**, the email may be with a different product. Try changing the redirect URL in `public/_redirects` to one of these, then redeploy:
+  - **Network Solutions (alt interface):** `https://webmail.networksolutionsemail.com/appsuite/`
+  - **Web.com account (log in, then open email):** `https://www.web.com/my-account/login?webmaillogin=true`
+  - **SecureServer:** `https://webmail.secureserver.net`
+- **To get the correct URL:** Call Network Solutions (1-888-793-7657) or Web.com support and ask: “What is the webmail login URL for classicballroom.com?” They can confirm which product hosts your mail and give you the exact link.
+- **Using webmail.classicballroom.com:** If your provider gives you a hostname (e.g. for CNAME), add that **CNAME** in Netlify DNS for **webmail**, then you can point the redirect to `https://webmail.classicballroom.com` if you like.
+
+### Email authentication (SPF) – fix “sender is unauthenticated” bounces
+
+After you moved DNS to Netlify, Gmail (and others) may reject mail from **@classicballroom.com** with:
+
+- **“Your email has been blocked because the sender is unauthenticated”**
+- **“SPF … = did not pass”** and/or **“DKIM = did not pass”**
+
+That happens because the domain’s DNS no longer authorizes your mail server (server284.com / Web.com). You need to add the correct **SPF** (and DKIM if your provider supports it) in **Netlify DNS**.
+
+**1. Add the SPF record in Netlify**
+
+Your mail is sent via **server284.com** (Web.com). Add this **TXT** record so receiving servers accept it:
+
+1. In **Netlify**, go to **Domain management** → **DNS** (or **Domains** → your domain → **DNS**).
+2. Click **Add record** (or **Add DNS record**).
+3. Set:
+   - **Type:** `TXT`
+   - **Name/host:** `@` (or leave blank for the root domain – Netlify may show “@” or “classicballroom.com”).
+   - **Value:**  
+     `v=spf1 include:spf.cloudus.oxcs.net ~all`
+4. Save.
+
+**2. If you already have an SPF record**
+
+You can only have **one** SPF TXT record for the domain. If Netlify already has a TXT record whose value starts with `v=spf1`, **edit that record** and add the Web.com include **before** `~all` or `-all`:
+
+- Before: `v=spf1 include:something.else.com ~all`
+- After:  `v=spf1 include:something.else.com include:spf.cloudus.oxcs.net ~all`
+
+**3. DKIM**
+
+Web.com / server284 typically do **not** offer DKIM; they rely on SPF. Gmail accepts “SPF **or** DKIM,” so fixing SPF is usually enough. If bounces continue, contact Web.com (or whoever hosts @classicballroom.com) and ask: “Do you support DKIM for classicballroom.com, and what DNS records should we add?”
+
+**4. MX records**
+
+Make sure **MX** records for classicballroom.com in Netlify DNS point to your mail provider. If MX was not re-added when you switched to Netlify, **incoming** mail will not be delivered. See **“MX records – how to add them in Netlify”** below.
+
+**5. Wait for DNS**
+
+Changes can take from a few minutes up to 24–48 hours. After that, send a test message from susan@classicballroom.com to Gmail again; it should no longer bounce for “unauthenticated sender.”
+
+### MX records – how to add them in Netlify
+
+MX (Mail Exchange) records tell the internet **where to deliver** email for @classicballroom.com. Without them, no one can receive mail at susan@classicballroom.com, josh@classicballroom.com, etc.
+
+Your mail is sent via **server284.com** (Web.com). Use the **Web.com Cloud Mail** MX hostnames below. If your email was set up through Network Solutions instead of Web.com, use the **Network Solutions** hostnames in the table; if unsure, add the Web.com set first, then contact support if mail still doesn’t arrive.
+
+**Step-by-step in Netlify**
+
+1. In **Netlify**, go to **Domain management** (or **Domains** in the left sidebar).
+2. Select the domain **classicballroom.com**.
+3. Open the **DNS** / **DNS records** section.
+4. Click **Add new record** (or **Add record** / **Add DNS record**).
+5. Choose **MX** as the record type.
+6. Add **four MX records** (one at a time), all with **Priority** `10`:
+
+   **If your email is Web.com Cloud Mail (server284 / typical for classicballroom):**
+
+   | Host / Name | Priority | Value / Mail server        |
+   |-------------|----------|----------------------------|
+   | `@`         | 10       | mx001.webcom.xion.oxcs.net |
+   | `@`         | 10       | mx002.webcom.xion.oxcs.net |
+   | `@`         | 10       | mx003.webcom.xion.oxcs.net |
+   | `@`         | 10       | mx004.webcom.xion.oxcs.net |
+
+   **If your email is Network Solutions Cloud Mail instead:**
+
+   | Host / Name | Priority | Value / Mail server          |
+   |-------------|----------|------------------------------|
+   | `@`         | 10       | mx001.netsol.xion.oxcs.net   |
+   | `@`         | 10       | mx002.netsol.xion.oxcs.net   |
+   | `@`         | 10       | mx003.netsol.xion.oxcs.net   |
+   | `@`         | 10       | mx004.netsol.xion.oxcs.net   |
+
+   For each record:
+   - **Hostname / Name:** `@` (or leave blank if Netlify uses that for the root domain).
+   - **Priority:** `10`.
+   - **Value / Mail server:** the hostname only (e.g. `mx001.webcom.xion.oxcs.net`) — no `http://` or trailing dot.
+7. Save each record. When finished, you should have **four MX** records, all priority 10.
+
+**Notes**
+
+- Do **not** add any other MX records for classicballroom.com (e.g. remove old or test MX if present), or delivery can be inconsistent.
+- DNS can take 15–30 minutes up to 24–48 hours to propagate. After that, incoming mail to @classicballroom.com should be delivered to your Web.com/Network Solutions mailboxes.
+- To confirm: use a tool like [dnschecker.org](https://dnschecker.org) (MX lookup for classicballroom.com) and check that the four hostnames above appear.
 
 ---
 
