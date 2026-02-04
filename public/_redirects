@@ -1,0 +1,8 @@
+# Redirect /webmail to your email provider's webmail login.
+# Replace the URL below with your actual webmail URL if different.
+# Common options:
+#   - Web.com / SecureServer: https://webmail.secureserver.net
+#   - Network Solutions: https://networksolutionsemail.com/edgedesk/cgi-bin/login.exe
+#   - Or use webmail.classicballroom.com if you add that CNAME in Netlify DNS
+/webmail    https://webmail.secureserver.net    302!
+/webmail/   https://webmail.secureserver.net    302!

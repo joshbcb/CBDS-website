@@ -66,6 +66,14 @@ Use this when the site is on **Netlify** and the domain is registered at **Netwo
 - **Propagation:** DNS can take from a few minutes up to 24–48 hours. Netlify will show the domain as “Pending” or “Waiting for DNS” until it sees the new nameservers.
 - **SSL:** Once DNS is pointing to Netlify, Netlify will issue an HTTPS certificate automatically. Test `https://classicballroom.com` and `https://www.classicballroom.com` after propagation.
 
+### Webmail after the switch
+
+If you had **www.classicballroom.com/webmail** (or similar) on the old host, that path no longer exists once the site is on Netlify. A redirect is set up so that **/webmail** and **/webmail/** send users to your email provider’s webmail login.
+
+- **Redirect file:** `public/_redirects` sends `/webmail` → `https://webmail.secureserver.net` (common for Web.com / SecureServer). After you deploy, **www.classicballroom.com/webmail** will redirect there.
+- **If your webmail is elsewhere:** Edit `public/_redirects` and replace the URL with the one your email host gave you (e.g. Network Solutions: `https://networksolutionsemail.com/edgedesk/cgi-bin/login.exe`, or the exact link from your provider).
+- **Using webmail.classicballroom.com:** If you prefer that subdomain, add a **CNAME** in Netlify DNS: **webmail** → the hostname your provider specifies (e.g. `webmail.secureserver.net`). Then you can change the redirect to `https://webmail.classicballroom.com` if you like.
+
 ---
 
 ## 1c. Enabling the CMS on Netlify (Decap / Netlify CMS)
