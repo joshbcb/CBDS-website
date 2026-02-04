@@ -1,18 +1,18 @@
 {
   "events": [
     {
-      "title": "New Years Eve",
-      "date": "December 31st",
-      "time": "9PM - 1AM",
-      "description": "Enjoy a night of dancing, champagne, and hot and cold hors d'oeuvres while the new year comes around!",
-      "image": "/uploads/events/flyer1.png"
-    },
-    {
       "title": "Valentine's Dance",
       "date": "February 14th",
       "time": "7PM - 11PM",
       "description": "Celebrate love with an evening of romantic ballroom dancing and refreshments!",
-      "image": "/uploads/events/dance_social1.png"
+      "image": "/uploads/events/vday-pdf.png"
+    },
+    {
+      "title": "Valentine's Day Party",
+      "date": "February 14th",
+      "time": "7PM - 10PM",
+      "description": "Enjoy a night of dancing, champagne, and hot and cold hors d'oeuvres while the new year comes around!",
+      "image": "/uploads/events/flyer1.png"
     },
     {
       "title": "Spring Gala",
