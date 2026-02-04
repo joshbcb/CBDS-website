@@ -1,25 +1,39 @@
 {
   "events": [
     {
-      "title": "Valentine's Dance",
+      "title": "Valentine's Day Party",
       "date": "February 14th",
-      "time": "7PM - 11PM",
+      "time": "7PM - 10PM",
       "description": "Celebrate love with an evening of romantic ballroom dancing and refreshments!",
       "image": "/uploads/events/vday-pdf.png"
     },
     {
-      "title": "Valentine's Day Party",
-      "date": "February 14th",
+      "title": "Student Graduation",
+      "date": "April 18th",
       "time": "7PM - 10PM",
-      "description": "Enjoy a night of dancing, champagne, and hot and cold hors d'oeuvres while the new year comes around!",
-      "image": "/uploads/events/flyer1.png"
+      "description": "Celebrate our your loved one's dance accomplishments and enjoy some social dancing with all of our graduates!",
+      "image": "/uploads/events/graduation-2026-pdf.png"
     },
     {
-      "title": "Spring Gala",
-      "date": "April 20th",
-      "time": "6PM - 10PM",
-      "description": "Welcome spring with elegant dancing, live music, and delicious appetizers!",
-      "image": "/uploads/events/dance_social2.png"
+      "title": "Viennese Waltz Intensive",
+      "date": "Wednesdays",
+      "time": "8PM - 9PM",
+      "description": "Learn and practice your viennese waltz with this progressive class. Challenge your knowledge and practice your skills every wednesday night in February.",
+      "image": "/uploads/events/viennese-waltz-intensive-pdf.png"
+    },
+    {
+      "image": "/uploads/events/freestyles-pdf.png",
+      "title": "Freestyles",
+      "date": "March 22nd",
+      "time": "11AM",
+      "description": "Test your skills and enjoy dancing with your peers in this fun multi-heat dance event! Talk to your instructor to learn how to participate."
+    },
+    {
+      "image": "/uploads/events/lovebirds-2026-pdf.png",
+      "title": "Free Lovebirds Class",
+      "date": "February 8th",
+      "time": "1PM - 2:30PM",
+      "description": "Learn the basics and make a move at this free dance lesson aimed towards towards couples celebrating an early valentines."
     }
   ]
 }
