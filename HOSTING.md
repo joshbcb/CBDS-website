@@ -66,17 +66,111 @@ Use this when the site is on **Netlify** and the domain is registered at **Netwo
 - **Propagation:** DNS can take from a few minutes up to 24–48 hours. Netlify will show the domain as “Pending” or “Waiting for DNS” until it sees the new nameservers.
 - **SSL:** Once DNS is pointing to Netlify, Netlify will issue an HTTPS certificate automatically. Test `https://classicballroom.com` and `https://www.classicballroom.com` after propagation.
 
+### Why email / webmail is tricky after a DNS move
+
+When you moved nameservers to Netlify, you took over **all** DNS for classicballroom.com. The old DNS (at SERVER284/Web.com) had the right MX, SPF, and CNAME for mail—but those records don’t move automatically. We’ve been rebuilding them from historical DNS and generic docs. The main unknown: **which exact product** hosts your email (Web.com Business Email, Network Solutions Cloud Mail, etc.). Each product has slightly different webmail URLs and CNAME targets. Once you know the product (and who has the account), one call or one support page gives you the exact records and login URL.
+
+### How to find out who provides your email
+
+1. **Who pays for or manages the email?**  
+   Whoever set up josh@classicballroom.com, susan@classicballroom.com, etc. (or whoever pays the bill) has an account with the email provider. That person has a login to **Web.com**, **Network Solutions**, or the host that ran the old site. The account dashboard usually shows the product name (e.g. “Business Email”, “Webmail”) and often lists “Your webmail URL” and DNS settings.
+
+2. **Log in where the domain or old site lived**  
+   - **Network Solutions:** Go to [networksolutions.com](https://www.networksolutions.com) → Sign in → **Domains** → classicballroom.com. Look for **Email**, **Mail**, or **DNS**; the product and webmail link are often there.  
+   - **Web.com:** Go to [web.com](https://www.web.com) → **My Account** / Sign in → find classicballroom.com. Check for **Email** or **Webmail** and which product is listed.
+
+3. **Call support (fastest)**  
+   Call **Network Solutions** (1-888-793-7657) or **Web.com** support and say:  
+   *“We own classicballroom.com. We moved our website DNS to another host. Which of your products is hosting our email (e.g. josh@classicballroom.com), and what are the exact DNS records and webmail login URL we need?”*  
+   They look up the account and can give you the product name, webmail URL, and correct CNAME for mail in one go.
+
+4. **Check old welcome or billing email**  
+   Search email for messages from **Web.com**, **Network Solutions**, or **server284** from when @classicballroom.com was set up; they often include the webmail URL and product name.
+
+Once you know the product and (if possible) have the account login, you can use that provider’s help page or support to get the exact webmail URL and CNAME target for mail.classicballroom.com—then everything (redirect, CNAME) can be set once and left alone.
+
+### If the old website was hosted at ICDSoft
+
+ICDSoft hosts both websites and email and uses **Roundcube** for webmail (which matches your setup). If the old site was on ICDSoft, the following applies.
+
+**How ICDSoft webmail works**
+
+- When the domain was pointed to ICDSoft, webmail was available at:
+  - **https://classicballroom.com/webmail** (path on the same server)
+  - **https://webmail.classicballroom.com**
+  - **https://mbox.classicballroom.com**
+- After you moved DNS to Netlify, the **site** is no longer on ICDSoft, so **classicballroom.com/webmail** is now your Netlify redirect—it can’t hit ICDSoft’s /webmail path anymore. To get webmail back, you need **webmail.classicballroom.com** or **mbox.classicballroom.com** to point to ICDSoft’s server again (via CNAME in Netlify DNS).
+
+**What to do**
+
+1. **If you still have an ICDSoft account** (same one that hosted classicballroom.com):
+   - Log in at [accounts.icdsoft.com](https://accounts.icdsoft.com) or your ICDSoft Control Panel.
+   - Find **Server name** (e.g. `s123.sureserver.com`) in the top-right or under server/hosting info.
+   - **Option A – Use ICDSoft’s URL when domain isn’t pointed at them:**  
+     Webmail is at **https://mbox.YOUR_SERVER.com** (e.g. `https://mbox.s123.sureserver.com`). You can put that URL in **`public/_redirects`** so **/webmail** goes there. No CNAME needed; /webmail will work as soon as you deploy.
+   - **Option B – Use webmail.classicballroom.com again:**  
+     Ask ICDSoft support: *“Our domain classicballroom.com is now on another host’s DNS (Netlify). What CNAME target should we set for **webmail.classicballroom.com** (or **mbox.classicballroom.com**) so we can access Roundcube webmail at that address?”* They’ll give you a hostname (e.g. their mail server). Add that CNAME in Netlify DNS, then set the **/webmail** redirect to **https://webmail.classicballroom.com** (or mbox) and deploy.
+
+2. **If email was on ICDSoft too** (MX and mail server):  
+   Your bounces came from **server284.com**; ICDSoft uses **sureserver.com** (related infrastructure). So either (a) email was on Web.com/server284 and only the **website** was on ICDSoft, or (b) everything was on ICDSoft and server284 is their outbound mail relay. If you’re not sure, ask ICDSoft: *“Is our email for classicballroom.com hosted with you, and what are the MX and webmail settings now that our DNS is elsewhere?”*
+
+3. **If you no longer have the ICDSoft account:**  
+   Contact ICDSoft support with the domain name and ask for the webmail URL (e.g. mbox.xxxx.sureserver.com) or the CNAME target for webmail.classicballroom.com. They can look it up by domain.
+
+**Summary:** If the old site was on ICDSoft, /webmail was either a path on their server or a link to webmail/mbox.classicballroom.com. To restore it: use the mbox.xxxx.sureserver.com URL in your redirect (easiest), or get the CNAME target from ICDSoft and point webmail.classicballroom.com (or mbox) at it in Netlify DNS, then redirect /webmail there.
+
+**ICDSoft mail server – exact CNAME (from Control Panel)**
+
+From the ICDSoft Control Panel **Mail system information**, the mail server hostname is **mail.server284.com**. So:
+
+1. **In Netlify DNS:** Add or edit the **CNAME** for **mail**:
+   - **Name / Host:** `mail`
+   - **Value / Target:** `mail.server284.com`  
+   (Remove any existing CNAME for **mail** that pointed to something else, e.g. mail.classicballroom.com.webcommail.net.)
+2. **Redirect:** **`public/_redirects`** is set so **/webmail** and **/webmail/** go to **https://mail.classicballroom.com**. After the CNAME is in place and DNS has propagated, **www.classicballroom.com/webmail** and **https://mail.classicballroom.com** will both load ICDSoft’s Roundcube webmail.
+
+Your MX (priority 0 → mail.classicballroom.com) and SPF are already correct; this CNAME makes **mail.classicballroom.com** resolve to mail.server284.com so webmail loads instead of “Under Construction.”
+
+**Alternative:** The old DNS used an **A record** for mail (mail.classicballroom.com → 192.252.144.34), not a CNAME. You can use either: **CNAME** `mail` → `mail.server284.com` (recommended) or **A** record `mail` → `192.252.144.34`. Both work.
+
+### Full DNS from old site (ICDSoft/server284)
+
+For reference, the old DNS had:
+
+| Type | Name / Host | Value | Notes |
+|------|-------------|--------|-------|
+| A | @ / classicballroom.com | 192.252.144.34 | Old website; now on Netlify. |
+| A | mail | 192.252.144.34 | Use **CNAME** mail → mail.server284.com in Netlify instead (or A → 192.252.144.34). |
+| MX | @ | mail.classicballroom.com, priority 0 | Add in Netlify. |
+| TXT | @ | v=spf1 a mx include:server284.smtp-spf.sureserver.com ~all | SPF – add in Netlify (you already did). |
+| TXT | _dmarc | v=DMARC1; p=none; | DMARC – add in Netlify (see below). |
+| TXT | dkim._domainkey | v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCw/Ir/vSZXby/zgjV7gvrKU+3skG0hbOpkR9rfTWwsUh19B5jmdplOZwxl4egr5txVAGBHpXSVu4TXx244gcnDFyv9G07PeZTYE9zbgi2dqUEjb9wRs1T/HHUTUjWo7bzO8gOIfu2kQpiqn2dIgH43dPf2tSDtHZZhg5GIR6oXWQIDAQAB | DKIM – add in Netlify (see below). |
+
+**Add DMARC and DKIM in Netlify**
+
+These help with deliverability and fix “DKIM = did not pass” in Gmail:
+
+1. **DMARC** – In Netlify DNS, add **TXT**:
+   - **Name:** `_dmarc`
+   - **Value:** `v=DMARC1; p=none;`
+
+2. **DKIM** – In Netlify DNS, add **TXT**:
+   - **Name:** `dkim._domainkey`
+   - **Value:** `v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCw/Ir/vSZXby/zgjV7gvrKU+3skG0hbOpkR9rfTWwsUh19B5jmdplOZwxl4egr5txVAGBHpXSVu4TXx244gcnDFyv9G07PeZTYE9zbgi2dqUEjb9wRs1T/HHUTUjWo7bzO8gOIfu2kQpiqn2dIgH43dPf2tSDtHZZhg5GIR6oXWQIDAQAB`
+
+After DNS propagates, SPF + DKIM should both pass for Gmail.
+
 ### Webmail after the switch
 
 If you had **www.classicballroom.com/webmail** (or similar) on the old host, that path no longer exists once the site is on Netlify. A redirect is set up so that **/webmail** and **/webmail/** send users to your email provider’s webmail login.
 
-- **Redirect file:** `public/_redirects` currently sends `/webmail` → **Network Solutions webmail** (https://www.networksolutionsemail.com/...), since the domain is registered with Network Solutions. Deploy and try **www.classicballroom.com/webmail**; log in with your full email address (e.g. josh@classicballroom.com) and mailbox password.
+- **Redirect file:** `public/_redirects` sends `/webmail` → **https://mail.classicballroom.com**. For that to load webmail (ICDSoft Roundcube), add in Netlify DNS: **CNAME** `mail` → **mail.server284.com** (see “ICDSoft mail server – exact CNAME” above). Then deploy and try **www.classicballroom.com/webmail**; log in with your full email address (e.g. josh@classicballroom.com) and mailbox password.
 - **If that login doesn’t work**, the email may be with a different product. Try changing the redirect URL in `public/_redirects` to one of these, then redeploy:
   - **Network Solutions (alt interface):** `https://webmail.networksolutionsemail.com/appsuite/`
   - **Web.com account (log in, then open email):** `https://www.web.com/my-account/login?webmaillogin=true`
   - **SecureServer:** `https://webmail.secureserver.net`
 - **To get the correct URL:** Call Network Solutions (1-888-793-7657) or Web.com support and ask: “What is the webmail login URL for classicballroom.com?” They can confirm which product hosts your mail and give you the exact link.
-- **Using webmail.classicballroom.com:** If your provider gives you a hostname (e.g. for CNAME), add that **CNAME** in Netlify DNS for **webmail**, then you can point the redirect to `https://webmail.classicballroom.com` if you like.
+- **Using webmail.classicballroom.com or mail.classicballroom.com:** If your provider gives you a hostname (e.g. for CNAME), add that **CNAME** in Netlify DNS, then you can point the redirect there. If **mail.classicballroom.com** shows an “Under Construction” page, the CNAME target (e.g. mail.classicballroom.com.webcommail.net) is wrong for your product — ask Web.com/Network Solutions for the correct CNAME target, or use the direct webmail URL in **`public/_redirects`** (e.g. https://webmail.networksolutionsemail.com/appsuite/) so **/webmail** works without relying on mail.classicballroom.com.
 
 ### Email authentication (SPF) – fix “sender is unauthenticated” bounces
 

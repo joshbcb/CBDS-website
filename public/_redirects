@@ -1,4 +1,4 @@
-# Redirect /webmail to mail.classicballroom.com (matches old setup: MX pointed to mail.classicballroom.com).
-# Once CNAME "mail" -> mail.classicballroom.com.webcommail.net is in Netlify DNS, this URL will load webmail.
+# Redirect /webmail to mail.classicballroom.com (ICDSoft/server284 Roundcube).
+# In Netlify DNS: CNAME "mail" -> mail.server284.com so this URL resolves.
 /webmail    https://mail.classicballroom.com    302!
 /webmail/   https://mail.classicballroom.com    302!
