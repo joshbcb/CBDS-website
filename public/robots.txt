@@ -1,0 +1,6 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap (generated at build; adjust if your domain or path differs)
+Sitemap: https://www.classicballroom.com/sitemap-index.xml

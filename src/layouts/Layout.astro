@@ -1,5 +1,43 @@
 ---
 import '../styles/global.css';
+import { site, fullUrl, ogImageUrl } from '../config/site';
+import { contact } from '../data/Contact';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Canonical URL path (e.g. /contact). If omitted, uses current path. */
+  canonical?: string;
+  /** OG/Twitter image path or URL. Defaults to site.defaultOgImage. */
+  image?: string;
+  noindex?: boolean;
+}
+
+const { title: pageTitle, description, canonical: canonicalPath, image: imagePath, noindex } = Astro.props;
+const canonical = canonicalPath ?? (Astro.url.pathname.replace(/\/$/, '') || '/');
+const fullCanonical = fullUrl(canonical);
+const title = pageTitle ? `${pageTitle} | ${site.name}` : site.defaultTitle;
+const desc = description ?? site.defaultDescription;
+const ogImage = ogImageUrl(imagePath ?? site.defaultOgImage);
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'DanceSchool',
+  name: site.name,
+  description: site.defaultDescription,
+  url: site.url,
+  telephone: contact.phone,
+  email: contact.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: contact.address.line1,
+    addressLocality: 'Hackettstown',
+    addressRegion: 'NJ',
+    postalCode: '07840',
+    addressCountry: 'US',
+  },
+  image: fullUrl(site.defaultOgImage),
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -8,7 +46,26 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/jpeg" href="/images/CBDS_black_logo.jpg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Classic Ballroom Dance Studio</title>
+		<title>{title}</title>
+		<meta name="description" content={desc} />
+		{noindex ? <meta name="robots" content="noindex, nofollow" /> : null}
+		<link rel="canonical" href={fullCanonical} />
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={fullCanonical} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={desc} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:site_name" content={site.name} />
+		<meta property="og:locale" content={site.locale} />
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={desc} />
+		<meta name="twitter:image" content={ogImage} />
+		{site.twitterHandle ? <meta name="twitter:site" content={site.twitterHandle} /> : null}
+		<!-- JSON-LD -->
+		<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 		<!-- Netlify Identity: required so invite links (with #invite_token) show the "set password" flow -->
 		<script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 	</head>

@@ -330,6 +330,37 @@ After that, every contact form submission will trigger an email to susan@classic
 
 ---
 
+## 1e. SEO (search and social)
+
+The site is set up for strong SEO and social sharing.
+
+### What’s in place
+
+- **Meta tags:** Every page has a unique `<title>` and `<meta name="description">`. Defaults and per-page overrides live in `src/config/site.ts` and in each page’s `<Layout>` props.
+- **Canonical URLs:** Each page sets a canonical URL so search engines know the preferred URL (avoids duplicate-content issues with www vs non-www or trailing slashes).
+- **Open Graph & Twitter Card:** `og:title`, `og:description`, `og:image`, `og:url`, and Twitter equivalents so links look good when shared on social media.
+- **Structured data:** JSON-LD `DanceSchool` (LocalBusiness) with name, address, phone, email, and image. Helps search engines understand the business and can enable rich results.
+- **Sitemap:** `@astrojs/sitemap` generates `sitemap-index.xml` and sitemaps at build time. The production URL is set in `astro.config.mjs` (`site: 'https://www.classicballroom.com'`).
+- **robots.txt:** In `public/robots.txt`, allows all crawlers and points to the sitemap.
+
+### What you can change
+
+- **Site URL:** If you use a different domain or prefer non-www, update:
+  - `site.url` in **`src/config/site.ts`**
+  - `site` in **`astro.config.mjs`**
+  - The `Sitemap:` line in **`public/robots.txt`**
+- **Default title/description:** Edit `site.defaultTitle` and `site.defaultDescription` in `src/config/site.ts`.
+- **Per-page SEO:** Each page passes `title`, `description`, `canonical`, or `image` to `<Layout>`. Adjust those in the page files (e.g. `src/pages/contact.astro`).
+- **Default share image:** Change `site.defaultOgImage` in `src/config/site.ts` to another path (e.g. a dedicated OG image under `/images/`).
+- **Twitter handle:** If you have a Twitter/X account for the studio, set `site.twitterHandle` in `src/config/site.ts` (e.g. `@ClassicBallroom`).
+
+### Optional next steps
+
+- Submit `https://www.classicballroom.com/sitemap-index.xml` in **Google Search Console** and **Bing Webmaster Tools**.
+- Add more JSON-LD (e.g. `Event` for upcoming events, `FAQPage` if you add an FAQ section) if you want richer snippets.
+
+---
+
 ## 2. Should You Pick Your Own Host or Use Theirs?
 
 | Use **your/host’s platform** (e.g. Netlify) | Use **client’s** existing host |

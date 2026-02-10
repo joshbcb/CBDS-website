@@ -6,7 +6,12 @@ import ImageGallery from "../components/ImageGallery.astro"
 import { galleries } from "../data/galleries";
 ---
 
-<Layout>
+<Layout
+  title="Photos"
+  description="Photo galleries from Classic Ballroom Dance Studio—showcases, events, weddings, and more. See the dance community in Hackettstown, NJ."
+  canonical="/photos"
+  image="/images/garnerbanner.jpg"
+/>
     <Header />
     {galleries.map((gallery) => (
         <ImageGallery
