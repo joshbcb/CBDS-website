@@ -2,7 +2,11 @@
   "galleries": [
     {
       "title": "Photos",
-      "images": []
+      "images": [
+        "/uploads/galleries/carousel1.jpg",
+        "/uploads/galleries/carousel2.jpg",
+        "/uploads/galleries/maru_dancing.jpg"
+      ]
     },
     {
       "title": "Wedding Photos",
