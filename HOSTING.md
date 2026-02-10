@@ -312,6 +312,55 @@ Edit **`public/admin/config.yml`** and set `branch` to your default branch (e.g.
 
 ---
 
+## 1d. Contact forms – email notifications (susan@classicballroom.com)
+
+The site uses **Netlify Forms** for the contact forms (Contact Us on the homepage/services and the contact page form). Submissions are sent to Netlify; you then tell Netlify to email each submission to **susan@classicballroom.com**.
+
+### One-time setup in Netlify
+
+1. In [app.netlify.com](https://app.netlify.com), open your site (e.g. Classic Ballroom).
+2. Go to **Site configuration** (or **Site settings**) → **Forms**.
+3. Confirm the form named **contact** appears after a deploy (Netlify detects forms with `data-netlify="true"` in the built HTML).
+4. Under **Form notifications** (or **Notifications**), click **Add notification** → **Email notification**.
+5. Set **Email to notify** to **susan@classicballroom.com** (or multiple addresses if you like).
+6. Optionally set **Subject** (e.g. `New message from classicballroom.com`) and when to send (e.g. on new form submission).
+7. Save.
+
+After that, every contact form submission will trigger an email to susan@classicballroom.com with the submitted fields (name, phone, email, message/description). No backend code or API keys are required.
+
+---
+
+## 1e. SEO (search and social)
+
+The site is set up for strong SEO and social sharing.
+
+### What’s in place
+
+- **Meta tags:** Every page has a unique `<title>` and `<meta name="description">`. Defaults and per-page overrides live in `src/config/site.ts` and in each page’s `<Layout>` props.
+- **Canonical URLs:** Each page sets a canonical URL so search engines know the preferred URL (avoids duplicate-content issues with www vs non-www or trailing slashes).
+- **Open Graph & Twitter Card:** `og:title`, `og:description`, `og:image`, `og:url`, and Twitter equivalents so links look good when shared on social media.
+- **Structured data:** JSON-LD `DanceSchool` (LocalBusiness) with name, address, phone, email, and image. Helps search engines understand the business and can enable rich results.
+- **Sitemap:** `@astrojs/sitemap` generates `sitemap-index.xml` and sitemaps at build time. The production URL is set in `astro.config.mjs` (`site: 'https://www.classicballroom.com'`).
+- **robots.txt:** In `public/robots.txt`, allows all crawlers and points to the sitemap.
+
+### What you can change
+
+- **Site URL:** If you use a different domain or prefer non-www, update:
+  - `site.url` in **`src/config/site.ts`**
+  - `site` in **`astro.config.mjs`**
+  - The `Sitemap:` line in **`public/robots.txt`**
+- **Default title/description:** Edit `site.defaultTitle` and `site.defaultDescription` in `src/config/site.ts`.
+- **Per-page SEO:** Each page passes `title`, `description`, `canonical`, or `image` to `<Layout>`. Adjust those in the page files (e.g. `src/pages/contact.astro`).
+- **Default share image:** Change `site.defaultOgImage` in `src/config/site.ts` to another path (e.g. a dedicated OG image under `/images/`).
+- **Twitter handle:** If you have a Twitter/X account for the studio, set `site.twitterHandle` in `src/config/site.ts` (e.g. `@ClassicBallroom`).
+
+### Optional next steps
+
+- Submit `https://www.classicballroom.com/sitemap-index.xml` in **Google Search Console** and **Bing Webmaster Tools**.
+- Add more JSON-LD (e.g. `Event` for upcoming events, `FAQPage` if you add an FAQ section) if you want richer snippets.
+
+---
+
 ## 2. Should You Pick Your Own Host or Use Theirs?
 
 | Use **your/host’s platform** (e.g. Netlify) | Use **client’s** existing host |

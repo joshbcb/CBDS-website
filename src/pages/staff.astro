@@ -10,7 +10,11 @@ import Spacer from "../components/Spacer.astro"
 import { staff } from '../data/Staff';
 ---
 
-<Layout>
+<Layout
+  title="Our Team"
+  description="Meet the instructors and team at Classic Ballroom Dance Studio in Hackettstown, NJ. Experienced, friendly teachers for ballroom and Latin dance."
+  canonical="/staff"
+/>
     <Header />
     <StaffGrid staff={staff} />
     <Spacer height="4rem" />

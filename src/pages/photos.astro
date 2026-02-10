@@ -3,28 +3,21 @@ import Layout from "../layouts/Layout.astro"
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
 import ImageGallery from "../components/ImageGallery.astro"
-
-/* Data */
-import { galleries } from "../data/imageGalleries.js";
+import { galleries } from "../data/galleries";
 ---
 
-<Layout>
+<Layout
+  title="Photos"
+  description="Photo galleries from Classic Ballroom Dance Studio—showcases, events, weddings, and more. See the dance community in Hackettstown, NJ."
+  canonical="/photos"
+  image="/images/garnerbanner.jpg"
+/>
     <Header />
-    <ImageGallery
-        header="Photos"
-        images={galleries["photos"].images}
-     />
-     <ImageGallery
-        header="Wedding Photos"
-        images={galleries["photos"].images}
-     />
-     <ImageGallery
-        header="Fall Showcase 2025"
-        images={galleries["photos"].images}
-     />
-     <ImageGallery
-        header="Kings Ball 2025"
-        images={galleries["photos"].images}
-     />
+    {galleries.map((gallery) => (
+        <ImageGallery
+            header={gallery.title}
+            images={gallery.images ?? []}
+        />
+    ))}
     <Footer />
 </Layout>
