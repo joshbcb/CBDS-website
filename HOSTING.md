@@ -316,17 +316,40 @@ Edit **`public/admin/config.yml`** and set `branch` to your default branch (e.g.
 
 The site uses **Netlify Forms** for the contact forms (Contact Us on the homepage/services and the contact page form). Submissions are sent to Netlify; you then tell Netlify to email each submission to **susan@classicballroom.com**.
 
-### One-time setup in Netlify
+### Step-by-step: set up forms in Netlify
 
-1. In [app.netlify.com](https://app.netlify.com), open your site (e.g. Classic Ballroom).
-2. Go to **Site configuration** (or **Site settings**) → **Forms**.
-3. Confirm the form named **contact** appears after a deploy (Netlify detects forms with `data-netlify="true"` in the built HTML).
-4. Under **Form notifications** (or **Notifications**), click **Add notification** → **Email notification**.
-5. Set **Email to notify** to **susan@classicballroom.com** (or multiple addresses if you like).
-6. Optionally set **Subject** (e.g. `New message from classicballroom.com`) and when to send (e.g. on new form submission).
-7. Save.
+**Before you start:** Deploy the site at least once so Netlify has built the pages. Netlify detects forms only in the built HTML (forms have `data-netlify="true"` and `name="contact"`).
 
-After that, every contact form submission will trigger an email to susan@classicballroom.com with the submitted fields (name, phone, email, message/description). No backend code or API keys are required.
+1. **Log in to Netlify**  
+   Go to [app.netlify.com](https://app.netlify.com) and sign in.
+
+2. **Open your site**  
+   Click the site (e.g. Classic Ballroom / classicballroom.com) from the dashboard.
+
+3. **Open Forms**  
+   In the left sidebar, click **Site configuration** (or **Site settings**), then **Forms**.  
+   - If you don’t see “Forms,” look under **Build & deploy** or the main site menu for **Forms**.
+
+4. **Confirm the form is detected**  
+   After a deploy, you should see a form named **contact** in the list.  
+   - If it’s missing, trigger a new deploy (e.g. push a commit or click “Trigger deploy” in the Deploys tab), then check again.  
+   - Netlify scans the built HTML for `<form data-netlify="true">` and registers the form’s `name` attribute.
+
+5. **Add an email notification**  
+   - On the Forms page, find **Form notifications** (or **Notifications**).  
+   - Click **Add notification** (or **Add form notification**).  
+   - Choose **Email notification**.
+
+6. **Configure the notification**  
+   - **Event:** Leave as “New form submission” (or “Notify me when a form is submitted”).  
+   - **Email to notify:** Enter **susan@classicballroom.com**. You can add more addresses if needed.  
+   - **Subject (optional):** e.g. `New message from classicballroom.com` or `Contact form submission`.  
+   - Save (e.g. **Save** or **Create notification**).
+
+7. **Test it**  
+   Visit your live site, fill out the contact form on the homepage or contact page, and submit. Susan should receive an email with the submitted fields (name, phone, email, message/description).
+
+No backend code or API keys are required. Submissions are also stored in Netlify under **Forms** → **contact** → individual submissions, so you can review them in the dashboard even without email.
 
 ---
 
