@@ -276,7 +276,11 @@ const {
 
       const formData = new FormData(form);
       formData.append('form-name', 'contact');
-      const body = new URLSearchParams(formData as unknown as Record<string, string>).toString();
+      const params = new URLSearchParams();
+      for (const [key, value] of formData.entries()) {
+        params.append(key, typeof value === 'string' ? value : value.toString());
+      }
+      const body = params.toString();
 
       const res = await fetch(window.location.pathname || '/', {
         method: 'POST',
