@@ -312,6 +312,24 @@ Edit **`public/admin/config.yml`** and set `branch` to your default branch (e.g.
 
 ---
 
+## 1d. Contact forms – email notifications (susan@classicballroom.com)
+
+The site uses **Netlify Forms** for the contact forms (Contact Us on the homepage/services and the contact page form). Submissions are sent to Netlify; you then tell Netlify to email each submission to **susan@classicballroom.com**.
+
+### One-time setup in Netlify
+
+1. In [app.netlify.com](https://app.netlify.com), open your site (e.g. Classic Ballroom).
+2. Go to **Site configuration** (or **Site settings**) → **Forms**.
+3. Confirm the form named **contact** appears after a deploy (Netlify detects forms with `data-netlify="true"` in the built HTML).
+4. Under **Form notifications** (or **Notifications**), click **Add notification** → **Email notification**.
+5. Set **Email to notify** to **susan@classicballroom.com** (or multiple addresses if you like).
+6. Optionally set **Subject** (e.g. `New message from classicballroom.com`) and when to send (e.g. on new form submission).
+7. Save.
+
+After that, every contact form submission will trigger an email to susan@classicballroom.com with the submitted fields (name, phone, email, message/description). No backend code or API keys are required.
+
+---
+
 ## 2. Should You Pick Your Own Host or Use Theirs?
 
 | Use **your/host’s platform** (e.g. Netlify) | Use **client’s** existing host |
