@@ -116,3 +116,25 @@ collections:
             fields:
               - { name: "name", label: "Label", widget: "string" }
               - { name: "image", label: "Calendar image", widget: "image", required: false, allow_multiple: false, media_folder: "/public/uploads/calendars", public_folder: "/uploads/calendars" }
+
+  - name: "galleries"
+    label: "Photo galleries"
+    files:
+      - name: "galleries"
+        label: "Galleries"
+        file: "content/galleries.json"
+        fields:
+          - name: "galleries"
+            label: "Galleries"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { name: "title", label: "Gallery title", widget: "string", hint: "e.g. Photos, Wedding Photos, Fall Showcase 2025" }
+              - name: "images"
+                label: "Images"
+                widget: "image"
+                allow_multiple: true
+                required: false
+                media_folder: "/public/uploads/galleries"
+                public_folder: "/uploads/galleries"
+                hint: "Select or upload multiple images at once"
