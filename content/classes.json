@@ -31,13 +31,7 @@
       "image": "/uploads/classes/dance_social1.png"
     },
     {
-      "title": "Beginner Tap",
-      "day": "Saturaday",
-      "time": "10:00 AM",
-      "image": "/uploads/classes/tap_dance1.png"
-    },
-    {
-      "title": "Intermediate Tap",
+      "title": "Tap",
       "day": "Saturday",
       "time": "11:00 AM",
       "image": "/uploads/classes/tap_dance2.png"
