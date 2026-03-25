@@ -8,13 +8,6 @@
       "image": "/uploads/events/graduation-2026-pdf.png"
     },
     {
-      "image": "/uploads/events/freestyles-pdf.png",
-      "title": "Freestyles",
-      "date": "March 22nd",
-      "time": "11AM",
-      "description": "Test your skills and enjoy dancing with your peers in this fun multi-heat dance event! Talk to your instructor to learn how to participate."
-    },
-    {
       "title": "Bachata Intensive",
       "date": "Wednesdays in March",
       "time": "8PM - 9PM",
@@ -22,18 +15,18 @@
       "image": "/uploads/events/screen-shot-2026-02-21-at-6.12.46-pm.png"
     },
     {
-      "title": "Saint Patrick's Day Potluck Party",
-      "date": "March 14th ",
-      "time": "7PM - 10PM",
-      "description": "\nCelebrate with us! Bring a dish to share and enjoy an evening of food, friends, and plenty of dancing.",
-      "image": "/uploads/events/screen-shot-2026-02-21-at-6.50.11-pm.png"
-    },
-    {
       "title": "Classic Animation Showcase",
       "date": "May 16th",
       "time": "Starting at 6PM",
       "description": "Enjoy watching our students perform to music from classic animated shows and movies!",
       "image": "/uploads/events/screen-shot-2025-10-25-at-6.12.17-pm.png"
+    },
+    {
+      "title": "Peabody Intensive",
+      "date": "Wednesdays in April",
+      "time": "8-9 PM",
+      "description": "Learn to dance the Peabody with confidence while having fun!",
+      "image": "/uploads/events/screen-shot-2026-03-20-at-4.51.15-pm.png"
     }
   ]
 }
