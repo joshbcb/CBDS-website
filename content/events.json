@@ -8,13 +8,6 @@
       "image": "/uploads/events/graduation-2026-pdf.png"
     },
     {
-      "title": "Bachata Intensive",
-      "date": "Wednesdays in March",
-      "time": "8PM - 9PM",
-      "description": "Join us for a focused Bachata class designed to build technique and confidence on the floor.",
-      "image": "/uploads/events/screen-shot-2026-02-21-at-6.12.46-pm.png"
-    },
-    {
       "title": "Classic Animation Showcase",
       "date": "May 16th",
       "time": "Starting at 6PM",
@@ -27,6 +20,13 @@
       "time": "8-9 PM",
       "description": "Learn to dance the Peabody with confidence while having fun!",
       "image": "/uploads/events/screen-shot-2026-03-25-at-3.02.11-pm.png"
+    },
+    {
+      "title": "Cinco de Mayo Dance Party",
+      "date": "May 5th",
+      "time": "9-10 PM",
+      "description": "Join us for our Latin Development class at 8 PM and stay for a fun Cinco de Mayo Dance Party right after!",
+      "image": "/uploads/events/screen-shot-2026-04-03-at-7.24.46-pm.png"
     }
   ]
 }
