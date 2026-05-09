@@ -1,13 +1,6 @@
 {
   "events": [
     {
-      "title": "Student Graduation",
-      "date": "April 18th",
-      "time": "7PM - 10PM",
-      "description": "Celebrate our your loved one's dance accomplishments and enjoy some social dancing with all of our graduates!",
-      "image": "/uploads/events/graduation-2026-pdf.png"
-    },
-    {
       "title": "Classic Animation Showcase",
       "date": "May 16th",
       "time": "Starting at 6PM",
@@ -15,18 +8,25 @@
       "image": "/uploads/events/screen-shot-2026-03-24-at-8.53.05-pm.png"
     },
     {
-      "title": "Peabody Intensive",
-      "date": "Wednesdays in April",
-      "time": "8-9 PM",
-      "description": "Learn to dance the Peabody with confidence while having fun!",
-      "image": "/uploads/events/screen-shot-2026-03-25-at-3.02.11-pm.png"
+      "title": "Warm Up Workshop with Kamil",
+      "date": "Sunday, June 7th ",
+      "time": "10:30 AM - 12:00 PM",
+      "description": "Learn how to warm up for lessons, performances, and competitions!  Great for everyone!",
+      "image": "/uploads/events/screen-shot-2026-05-09-at-5.53.05-pm.png"
     },
     {
-      "title": "Makeup Class with Helen",
-      "date": "May 2nd",
-      "time": "3-5 PM",
-      "description": "Learn techniques for doing your own showcase and party  makeup!  $40 per person.",
-      "image": "/uploads/events/screen-shot-2026-03-25-at-3.48.26-pm.png"
+      "title": "Arm Styling Intensive",
+      "date": "Wednesdays in June",
+      "time": "8-9 PM",
+      "description": "This arm styling class focuses on developing graceful, expressive arm movements that enhance posture, musicality, and overall dance presentation. Dancers learn proper arm placement, fluid transitions, and styling techniques that complement partner work and elevate performance on the social floor or in competition.\n",
+      "image": "/uploads/events/screen-shot-2026-05-09-at-5.56.18-pm.png"
+    },
+    {
+      "title": "Argentine Tango Intensive",
+      "date": "Wednesdays in May ",
+      "time": "8-9 PM",
+      "description": "This Argentine Tango class is a relaxed, fun way to explore this smooth and expressive dance. You’ll work on connection, partner movement, and musicality while getting more comfortable dancing with the music and each other.\n",
+      "image": "/uploads/events/screen-shot-2026-04-22-at-8.41.16-pm.png"
     }
   ]
 }
