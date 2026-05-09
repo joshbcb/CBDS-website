@@ -1,12 +1,6 @@
 {
   "classes": [
     {
-      "title": "Classic Kids",
-      "day": "Tuesday",
-      "time": "5:00 PM",
-      "image": "/uploads/classes/classic_kids.png"
-    },
-    {
       "title": "Latin Technique",
       "day": "Tuesday",
       "time": "8:00 PM",
