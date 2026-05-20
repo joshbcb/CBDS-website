@@ -1,13 +1,6 @@
 {
   "events": [
     {
-      "title": "Classic Animation Showcase",
-      "date": "May 16th",
-      "time": "Starting at 6PM",
-      "description": "Enjoy watching our students perform to music from classic animated shows and movies!",
-      "image": "/uploads/events/screen-shot-2026-03-24-at-8.53.05-pm.png"
-    },
-    {
       "title": "Warm Up Workshop with Kamil",
       "date": "Sunday, June 7th ",
       "time": "10:30 AM - 12:00 PM",
@@ -41,6 +34,13 @@
       "time": "6 PM - 8 PM",
       "description": "Classic Ballroom Dance Studio is proud to announce the date for our 2nd Annual Dancing with the Local Stars! Come watch our local celebrities as they compete for the mirror ball trophy! Tickets are now available online at https://hackettstownbid.com/.../dancing-with-the-local.../",
       "image": "/uploads/events/screen-shot-2026-05-12-at-3.28.10-pm.png"
+    },
+    {
+      "title": "FREE Summer Salsa Open House",
+      "date": "Sunday, June 28th",
+      "time": "2-4 PM",
+      "description": "Kick off summer with our special “Summer Salsa” Open House!  Learn the basics of Salsa and Bachata for FREE, and don’t forget to bring a friend.",
+      "image": "/uploads/events/screen-shot-2026-05-19-at-8.36.17-pm.png"
     }
   ]
 }
