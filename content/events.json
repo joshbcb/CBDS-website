@@ -1,13 +1,6 @@
 {
   "events": [
     {
-      "title": "Warm Up Workshop with Kamil",
-      "date": "Sunday, June 7th ",
-      "time": "10:30 AM - 12:00 PM",
-      "description": "Learn how to warm up for lessons, performances, and competitions!  Great for everyone!",
-      "image": "/uploads/events/screen-shot-2026-05-09-at-5.53.05-pm.png"
-    },
-    {
       "title": "Arm Styling Intensive",
       "date": "Wednesdays in June",
       "time": "8-9 PM",
@@ -15,25 +8,11 @@
       "image": "/uploads/events/screen-shot-2026-05-09-at-5.56.18-pm.png"
     },
     {
-      "title": "Argentine Tango Intensive",
-      "date": "Wednesdays in May ",
-      "time": "8-9 PM",
-      "description": "This Argentine Tango class is a relaxed, fun way to explore this smooth and expressive dance. You’ll work on connection, partner movement, and musicality while getting more comfortable dancing with the music and each other.\n",
-      "image": "/uploads/events/screen-shot-2026-04-22-at-8.41.16-pm.png"
-    },
-    {
       "title": "FREE Kids Camp",
       "date": "Week of July 13th",
       "time": "10 AM - Noon",
       "description": "Learn the basics of ballroom and Latin dances as you prepare for a show for family and friends on the last day of camp!",
       "image": "/uploads/events/screen-shot-2026-04-25-at-8.08.15-pm.png"
-    },
-    {
-      "title": "Dancing with the Local Stars",
-      "date": "Friday, June 5th",
-      "time": "6 PM - 8 PM",
-      "description": "Classic Ballroom Dance Studio is proud to announce the date for our 2nd Annual Dancing with the Local Stars! Come watch our local celebrities as they compete for the mirror ball trophy! Tickets are now available online at https://hackettstownbid.com/.../dancing-with-the-local.../",
-      "image": "/uploads/events/screen-shot-2026-05-12-at-3.28.10-pm.png"
     },
     {
       "title": "FREE Summer Salsa Open House",
@@ -48,6 +27,13 @@
       "time": "7-10 PM",
       "description": "Join us for our Summer Dinner Dance on June 13th for an evening of great dancing, delicious food, and fun with friends! We can’t wait to celebrate summer with you.\nCall the studio or email susan@classicballroom.com for more information or to RSVP. ",
       "image": "/uploads/events/screen-shot-2026-05-20-at-6.53.11-pm.png"
+    },
+    {
+      "title": "Partnership and Connection Workshop with Kamil",
+      "date": "July 26, 2026",
+      "time": "10:30 AM - Noon",
+      "description": "Explore how posture, frame, movement, and communication work together to create clear and effective partner dancing.",
+      "image": "/uploads/events/screen-shot-2026-06-12-at-8.52.10-pm.png"
     }
   ]
 }
