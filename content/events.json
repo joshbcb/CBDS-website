@@ -1,32 +1,11 @@
 {
   "events": [
     {
-      "title": "Arm Styling Intensive",
-      "date": "Wednesdays in June",
-      "time": "8-9 PM",
-      "description": "This arm styling class focuses on developing graceful, expressive arm movements that enhance posture, musicality, and overall dance presentation. Dancers learn proper arm placement, fluid transitions, and styling techniques that complement partner work and elevate performance on the social floor or in competition.\n",
-      "image": "/uploads/events/screen-shot-2026-05-09-at-5.56.18-pm.png"
-    },
-    {
       "title": "FREE Kids Camp",
       "date": "Week of July 13th",
       "time": "10 AM - Noon",
       "description": "Learn the basics of ballroom and Latin dances as you prepare for a show for family and friends on the last day of camp!",
       "image": "/uploads/events/screen-shot-2026-04-25-at-8.08.15-pm.png"
-    },
-    {
-      "title": "FREE Summer Salsa Open House",
-      "date": "Sunday, June 28th",
-      "time": "2-4 PM",
-      "description": "Kick off summer with our special “Summer Salsa” Open House!  Learn the basics of Salsa and Bachata for FREE, and don’t forget to bring a friend.",
-      "image": "/uploads/events/screen-shot-2026-05-19-at-8.36.17-pm.png"
-    },
-    {
-      "title": "Summer Dinner Dance",
-      "date": "Saturday, June 13th ",
-      "time": "7-10 PM",
-      "description": "Join us for our Summer Dinner Dance on June 13th for an evening of great dancing, delicious food, and fun with friends! We can’t wait to celebrate summer with you.\nCall the studio or email susan@classicballroom.com for more information or to RSVP. ",
-      "image": "/uploads/events/screen-shot-2026-05-20-at-6.53.11-pm.png"
     },
     {
       "title": "Partnership and Connection Workshop with Kamil",
@@ -41,6 +20,13 @@
       "time": "7:00 PM - 9:30 PM",
       "image": "/uploads/events/screen-shot-2026-06-22-at-4.08.15-pm.png",
       "description": "Join us for a patriotic social, and wear red, white, and blue!"
+    },
+    {
+      "title": "Country Line Dance Intensive",
+      "date": "Wednesdays in July starting July 8th",
+      "time": "8:00-9:00 PM",
+      "description": "Join Ashley for a fun class that will help to develop your technique and improve your country line dancing!",
+      "image": "/uploads/events/screen-shot-2026-06-10-at-2.44.47-pm.png"
     }
   ]
 }
