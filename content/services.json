@@ -37,12 +37,6 @@
       "image": "/uploads/services/themed_party.png"
     },
     {
-      "id": "kids",
-      "title": "Classic Kids",
-      "hoverText": "Ages 5–17: start here with our beginner-friendly group class, then grow with us. <br><br>Kids can add private lessons, group classes, competitions, and showcases whenever they're ready. Dance becomes a lifelong adventure.",
-      "image": "/uploads/services/kids_dance.png"
-    },
-    {
       "id": "social",
       "title": "Social Events",
       "hoverText": "Dance isn't just lessons—it's community. Join us for holidays, parties, and special events throughout the year. <br><br>No experience needed; just show up, meet other dancers, and have a great time.",
