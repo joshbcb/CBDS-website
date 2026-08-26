@@ -13,12 +13,6 @@
       "image": "/uploads/classes/smooth_teq.png"
     },
     {
-      "title": "Friday Group/Social",
-      "day": "Friday",
-      "time": "8:00 PM - 10:00 PM",
-      "image": "/uploads/classes/dance_social1.png"
-    },
-    {
       "title": "Tap",
       "day": "Saturday",
       "time": "11:00 AM",
@@ -29,6 +23,12 @@
       "day": "Saturday",
       "time": "7:00 PM - 9:30 PM",
       "image": "/uploads/classes/dance_social2.png"
+    },
+    {
+      "title": "Kids Class",
+      "day": "Mondays ",
+      "time": "6 PM",
+      "image": "/uploads/classes/classic_kids.png"
     }
   ]
 }
