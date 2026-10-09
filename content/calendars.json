@@ -1,10 +1,10 @@
 {
   "currentMonth": {
-    "name": "September 2026",
-    "image": ""
-  },
-  "nextMonth": {
     "name": "October 2026",
     "image": "/uploads/calendars/screen-shot-2026-09-17-at-6.32.58-pm.png"
+  },
+  "nextMonth": {
+    "name": "November 2026",
+    "image": "/uploads/calendars/screen-shot-2026-10-09-at-7.19.55-pm.png"
   }
 }
