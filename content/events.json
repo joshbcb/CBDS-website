@@ -27,6 +27,13 @@
       "time": "7-10 PM",
       "description": "Join us for an elegant evening of dinner and dancing!  ",
       "image": "/uploads/events/screen-shot-2026-11-04-at-6.51.54-pm.png"
+    },
+    {
+      "title": "New Year's Eve Party",
+      "date": "December 31st",
+      "time": "9 PM - 1 AM",
+      "description": "Celebrate the New Year in style with friends at Classic Ballroom Dance Studio! Join us for an evening of dancing, fun, and unforgettable memories as we welcome the year together!",
+      "image": "/uploads/events/screen-shot-2026-10-28-at-7.20.29-pm.png"
     }
   ]
 }
