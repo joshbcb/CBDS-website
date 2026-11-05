@@ -8,13 +8,6 @@
       "image": "/uploads/events/screen-shot-2026-07-15-at-1.41.42-pm.png"
     },
     {
-      "title": "Halloween Potluck Costume Party",
-      "date": "October 31st",
-      "time": "7-10 PM",
-      "description": "Join us for an evening of fun!  Wear a costume and bring a favorite dish to share!",
-      "image": "/uploads/events/screen-shot-2026-08-29-at-4.37.37-pm.png"
-    },
-    {
       "title": "Ballroom Pose Lines Wednesday Intensive",
       "date": "Wednesdays in November",
       "time": "8-9 PM",
@@ -27,6 +20,13 @@
       "time": "7-10 PM",
       "description": "Join your Classic Ballroom family for a Thanksgiving Potluck Party!  Enjoy good fun, friends, and dancing!",
       "image": "/uploads/events/dancegiving-2026.png"
+    },
+    {
+      "title": "Winter Gala",
+      "date": "December 5th",
+      "time": "7-10 PM",
+      "description": "Join us for an elegant evening of dinner and dancing!  ",
+      "image": "/uploads/events/screen-shot-2026-11-04-at-6.51.54-pm.png"
     }
   ]
 }
