@@ -1,13 +1,6 @@
 {
   "events": [
     {
-      "title": "Kids Class ",
-      "date": "Monday Evenings",
-      "time": "6 PM",
-      "description": "Classic Kids returns July 20th!  Have fun learning to dance while you prepare for a special Halloween performance!",
-      "image": "/uploads/events/screen-shot-2026-07-15-at-1.41.42-pm.png"
-    },
-    {
       "title": "Ballroom Pose Lines Wednesday Intensive",
       "date": "Wednesdays in November",
       "time": "8-9 PM",
@@ -34,6 +27,13 @@
       "time": "9 PM - 1 AM",
       "description": "Celebrate the New Year in style with friends at Classic Ballroom Dance Studio! Join us for an evening of dancing, fun, and unforgettable memories as we welcome the year together!",
       "image": "/uploads/events/screen-shot-2026-10-28-at-7.20.29-pm.png"
+    },
+    {
+      "title": "Kids Class",
+      "date": "Mondays ",
+      "time": "6 - 7 PM",
+      "description": "Join us for Kids Class and prepare for a performance at our Winter Gala on December 5th!",
+      "image": "/uploads/events/screen-shot-2026-11-08-at-1.28.22-pm.png"
     }
   ]
 }
